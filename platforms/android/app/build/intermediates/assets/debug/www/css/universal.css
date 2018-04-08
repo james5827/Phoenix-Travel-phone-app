@@ -1,0 +1,33 @@
+html{
+    height: 100%;
+}
+
+body{
+    text-transform: none;
+    height: 100%;
+}
+
+.ui-page{
+    height: 100%;
+}
+
+.ui-panel{
+    width: 8em;
+    overflow-y: scroll;
+}
+
+.ui-panel-inner{
+    padding: 0;
+}
+
+.ui-panel img{
+    width: 100%;
+}
+
+#myPanel{
+    background-color: #f9f9f9;
+}
+
+#myPanel .ui-btn{
+    border-radius: 0;
+}

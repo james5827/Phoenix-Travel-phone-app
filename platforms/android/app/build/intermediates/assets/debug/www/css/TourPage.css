@@ -1,0 +1,15 @@
+#page4 h1{
+    text-align: left;
+}
+
+.map{
+    height: 80%;
+    width: 100%;
+    border: #ffd600 1px solid;
+    border-radius: 3px;
+}
+
+.tour{
+    height: 95vh;
+    border: orange 1px solid;
+}

@@ -1,0 +1,16 @@
+#tblBookings{
+    width: 100%;
+    margin-top: 2%;
+}
+.ui-responsive {
+
+    display: table !important;
+}
+
+#tblBookings tbody tr:hover{
+    background-color: #e2e2e2;
+}
+
+.tour{
+    margin: 1em 0 1em 0;
+}

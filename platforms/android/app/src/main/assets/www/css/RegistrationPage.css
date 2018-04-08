@@ -1,0 +1,7 @@
+#RegistrationForm{
+    border-bottom: none;
+}
+
+#RegistrationForm .ui-input-text{
+    margin-bottom: 1.5em;
+}

@@ -53,15 +53,29 @@
             <li><a href="#page9">Home</a></li>
         </ul>
     </div>
-    <div data-role="footer">
-        <h4>FOR TESTING PURPOSES ONLY</h4>
+
+</div>
+
+<!--
+    Panel
+-->
+<div data-role="panel" data-display="overlay" id="myPanel" data-theme="a">
+    <div class="ui-panel-inner">
+        <img src="img/logo.png" class="LoginLogo">
+        <ul data-role="listview" data-inset="true">
+            <li data-icon="home"><a href="#page3">Home</a></li>
+            <li data-icon="false"><a href="#page4">Tours</a></li>
+            <li data-icon="user"><a>Account</a></li>
+            <li data-icon="back"><a>Logout</a></li>
+            <li data-icon="delete"><a data-rel="close">Close</a></li>
+        </ul>
     </div>
 </div>
 
 <!--
     Login Page
 -->
-<div data-role="page" id="page1" data-add-back-btn="true">
+<div data-role="page" id="page1">
     <div data-role="header">
         <h1></h1>
     </div>
@@ -69,7 +83,6 @@
         <img src="img/logo.png" class="LoginLogo">
         <h1 class="LoginTitle">Phoenix Travel</h1>
 
-        <!--TODO login form-->
         <div class="LoginForm">
             <form action="">
                 <div data-role="form-group">
@@ -81,9 +94,7 @@
                 <hr>
                 <button class="LoginButton" type="submit">Login</button>
             </form>
-            <form>
-                <button class="RegisterButton" type="submit">Register</button>
-            </form>
+            <a href="#page2" data-role="button">Register</a>
         </div>
     </div>
 </div>
@@ -91,14 +102,14 @@
 <!--
     Register Page
 -->
-<div data-role="page" id="page2" data-add-back-btn="true">
-    <div data-role="header">
-        <h1></h1>
+<div data-role="page" id="page2">
+    <div data-role="header" data-add-back-btn="true">
+        <h1>hello</h1>
     </div>
     <div data-role="content" id="Page2content" class="">
         <div class="ui-body ui-body-a ui-corner-all">
             <form id="RegistrationForm">
-                <h1>Registration</h1>
+                <h1 style="font-weight: bolder;">Registration</h1>
                 <div class="ui-field-contain">
                     <input type="text" name="username" id="username" placeholder="Username" value="">
                     <input type="text" name="name" id="name" placeholder="Full Name: James A O'Neill" value="">
@@ -119,16 +130,8 @@
     User Bookings
 -->
 <div data-role="page" id="page3" data-add-back-btn="true">
-    <div data-role="panel" data-display="overlay" id="myPanel">
-        <img src="img/logo.png" class="LoginLogo">
-        <ul data-role="listview" data-inset="true">
-            <li data-icon="false"><a>Tours</a></li>
-            <li data-icon="false"><a>Account</a></li>
-        </ul>
-    </div>
-
     <div data-role="header">
-        <a href="#myPanel" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
+        <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
         <h1></h1>
     </div>
     <div data-role="content" id="Page3content" class="">
@@ -154,32 +157,47 @@
                 </tr>
             </tbody>
         </table>
-        <form>
-            <button>View Tours</button>
-        </form>
+        <a href="#page4" data-role="button">View Tours</a>
     </div>
 </div>
 
+<!--
+    Tours Page
+-->
 <div data-role="page" id="page4" data-add-back-btn="true">
     <div data-role="header">
+        <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
         <h1></h1>
     </div>
-    <div data-role="content" id="Page4content" class="">
+    <div data-role="content" id="Page4content">
         <h1 class="LoginTitle">Tours</h1>
-        <div class="ui-body ui-body-a tour ui-corner-all">
-            <h1>Twelve Apostles Drive</h1>
-            <p>A drive along the Great Ocean Road to the Twelve Apostles.</p>
-            <div id="ApostlesMap" class="map"></div>
-        </div>
-        <div class="ui-body ui-body-a tour ui-corner-all">
-            <h1>Northeast Wineries Tour</h1>
-            <p>A tour to various wineries in North East Victoria.</p>
-            <div id="WineriesMap" class="map"></div>
-        </div>
-        <div class="ui-body ui-body-a tour ui-corner-all">
-            <h1>Melbourne Sightseeing</h1>
-            <p>Sight seeing across melbourne.</p>
-            <div id="MelbourneMap" class="map"></div>
+
+        <form>
+            <input data-type="search" id="tourSearch" placeholder="Search A Tour"/>
+        </form>
+
+        <div class="elements" id="filterableTour" data-filter="true" data-input="#tourSearch">
+            <div class="ui-body ui-body-a tour ui-corner-all" id="ApostlesTour" tabindex="1">
+                <h1>Twelve Apostles Drive</h1>
+                <p class="tourDescription">A drive along the Great Ocean Road to the Twelve Apostles.</p>
+                <div id="ApostlesMap" class="map transform"></div>
+                <p id="ApostlesMapClick" class="MapClick"><i>Click to see map.</i></p>
+                <button>View Trips</button>
+            </div>
+            <div class="ui-body ui-body-a tour ui-corner-all" id="WineriesTour" tabindex="1">
+                <h1>Northeast Wineries Tour</h1>
+                <p class="tourDescription">A tour to various wineries in North East Victoria.</p>
+                <div id="WineriesMap" class="map transform"></div>
+                <p id="WineriesMapClick" class="MapClick"><i>Click to see map.</i></p>
+                <button>View Trips</button>
+            </div>
+            <div class="ui-body ui-body-a tour ui-corner-all" id="MelbourneTour" tabindex="1">
+                <h1>Melbourne Sightseeing</h1>
+                <p class="tourDescription">Sight seeing across melbourne.</p>
+                <div id="MelbourneMap" class="map transform"></div>
+                <p id="MelbourneMapClick" class="MapClick"><i>Click to see map.</i></p>
+                <button>View Trips</button>
+            </div>
         </div>
     </div>
 </div>

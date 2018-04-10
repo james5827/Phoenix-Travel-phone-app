@@ -3,13 +3,39 @@
 }
 
 .map{
-    height: 80%;
+    height: 0;
     width: 100%;
-    border: #ffd600 1px solid;
+    border: #ffda00 0 solid;
     border-radius: 3px;
 }
 
 .tour{
-    height: 95vh;
-    border: orange 1px solid;
+    border: #E64A19 1px solid;
+    opacity: 0.1;
+    margin: 1em 0 1em 0;
+    transition: opacity 1s ease;
+}
+
+.MapClick{
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.tourDescription{
+    margin-top: 0.25em;
+    margin-bottom: 0;
+}
+
+.transform{
+    transition: height 1s ease-out;
+    transition-delay: 0.1s;
+}
+
+.transform-active {
+    height: 50vh;
+    border-width: 1px;
+}
+
+.transform-visible{
+    opacity: 1;
 }

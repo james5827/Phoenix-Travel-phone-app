@@ -21,3 +21,55 @@ function initMap(){
         disableDefaultUI: true
     });
 }
+
+//TODO: add to onDeviceReady
+(function initTourEvents(){
+    let tourPage = document.getElementById("page4");
+    let tours = Array.from(document.getElementsByClassName("tour"));
+    tourPage.addEventListener("scroll", ()=>{
+        tours.forEach((tour)=>{
+            if(window.innerHeight > tour.getBoundingClientRect().bottom)
+                tour.classList.add("transform-visible");
+            else
+                tour.classList.remove("transform-visible");
+        });
+    });
+
+    $("#filterableTour").filterable({
+        filter: function(event, ui) {
+            let test = Array.from(ui.items);
+            test.forEach((tour)=>{
+                if((tour.getBoundingClientRect().top !== 0) && window.innerHeight > tour.getBoundingClientRect().bottom) {
+                    tour.classList.add("transform-visible");
+                }else {
+                    tour.classList.remove("transform-visible");
+                }
+            });
+        }
+    });
+
+    let apostlesTour = document.getElementById("ApostlesTour");
+    let wineriesTour = document.getElementById("WineriesTour");
+    let melbourneTour = document.getElementById("MelbourneTour");
+    
+    apostlesTour.addEventListener("click", mapEvent(document.getElementById("ApostlesMap")));
+    apostlesTour.addEventListener("blur", mapBlurEvent(document.getElementById("ApostlesMap")));
+
+    wineriesTour.addEventListener("click", mapEvent(document.getElementById("WineriesMap")));
+    wineriesTour.addEventListener("blur", mapBlurEvent(document.getElementById("WineriesMap")));
+
+    melbourneTour.addEventListener("click", mapEvent(document.getElementById("MelbourneMap")));
+    melbourneTour.addEventListener("blur", mapBlurEvent(document.getElementById("MelbourneMap")));
+})();
+
+function mapEvent(node){
+    return function(){
+        node.classList.toggle("transform-active");
+    }
+}
+
+function mapBlurEvent(node){
+    return function(){
+        node.classList.remove("transform-active");
+    }
+}

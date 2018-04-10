@@ -6,7 +6,7 @@
     density="xhdpi"
     format="10"
     plugin-version="3.0.0"
-    timestamp="1523133737616"
+    timestamp="1523302739749"
     token="6836877047904403869"
     verifier="COLD_SWAP_REQUESTED" >
 
@@ -29,7 +29,7 @@
 
     <build
         build-mode="FULL"
-        timestamp="1523096239531"
+        timestamp="1523274807715"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="J:\CordovaProjects\Assignment\Assignment\platforms\android\app\build\outputs\apk\debug\app-debug.apk"
@@ -70,7 +70,7 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1523133737616"
+        timestamp="1523302739749"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="J:\CordovaProjects\Assignment\Assignment\platforms\android\app\build\outputs\apk\debug\app-debug.apk"

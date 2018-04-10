@@ -16,26 +16,32 @@ $(function(){
         // Billk added code
         if(pageinited){return;} else{pageinited= true;}
 
-        let home= $("#homepage");
-        let login = $("#page1");
-
-        home.live("pagebeforeshow", function(){
-
-        });
-          
-		home.live("pagebeforehide", function(){
-
+        $(document).ready(function(){
+            $('#myPanel').enhanceWithin().panel();
         });
 
-        login.live("pagebeforeshow", function(event){
+        let homePage= $("#homepage");
+        let loginPage = $("#page1");
+        let toursPage = $("#page4");
+
+        homePage.live("pagebeforeshow", ()=>{
+            console.log("before home page");
         });
+
+		homePage.live("pagebeforehide",()=>{});
+
+        loginPage.live("pagebeforeshow", ()=>{});
                  
-        login.live("pageshow", function(){
-
-        });
+        loginPage.live("pageshow", ()=>{});
             
-     	login.live("pagebeforehide", function(){
+     	loginPage.live("pagebeforehide", ()=>{});
 
+     	toursPage.live("pageshow", ()=>{
+            let tours = Array.from(document.getElementsByClassName("tour"));
+            tours.forEach((tour)=>{
+                if(window.innerHeight > tour.getBoundingClientRect().top + tour.offsetHeight)
+                    tour.classList.add("transform-visible");
+            });
         });
 
              

@@ -67,6 +67,13 @@ function initMap(){
     let wineriesViewBtn = document.getElementById("WineriesTripBtn");
     let melbourneViewBtn = document.getElementById("MelbourneTripBtn");
 
+    let testBtn = document.getElementById("testBtn");
+    testBtn.addEventListener("click", (e)=>{
+        let test = document.getElementById("testClass");
+        test.classList.toggle("upComingTrips-active");
+        testBtn.classList.toggle("tourBtn-active");
+    });
+
     apostlesTour.addEventListener("click", mapEvent(apostlesMap));
     apostlesTour.addEventListener("blur", (e)=>mapBlurEvent(apostlesMap, e));
 
@@ -80,8 +87,8 @@ function initMap(){
     wineriesMap.addEventListener("click", (e)=>{e.stopPropagation()});
     melbourneMap.addEventListener("click", (e)=>{e.stopPropagation()});
 
-    apostlesViewBtn.addEventListener("click", (e)=>viewBtnEvent(apostlesViewBtn, e));
-    wineriesViewBtn.addEventListener("click", (e)=>viewBtnEvent(wineriesViewBtn, e));
+    apostlesViewBtn.addEventListener("click", (e)=>viewBtnEvent(apostlesViewBtn, e), true);
+    wineriesViewBtn.addEventListener("click", (e)=>viewBtnEvent(wineriesViewBtn, e), true);
     melbourneViewBtn.addEventListener("click", (e)=>viewBtnEvent(melbourneViewBtn, e));
 })();
 
@@ -93,9 +100,8 @@ function mapEvent(node){
 }
 
 function mapBlurEvent(node, e){
-    if(e.relatedTarget.parentNode !== node.parentNode) {
+    if(!node.parentNode.contains(e.relatedTarget))
         node.classList.remove("transform-active");
-    }
     else
         node.parentElement.focus();
 }

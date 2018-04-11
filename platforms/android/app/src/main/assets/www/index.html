@@ -182,21 +182,33 @@
                 <p class="tourDescription">A drive along the Great Ocean Road to the Twelve Apostles.</p>
                 <div id="ApostlesMap" class="map transform"></div>
                 <p id="ApostlesMapClick" class="MapClick"><i>Click to see map.</i></p>
-                <button id="ApostlesTripBtn">View Trips</button>
+                <button id="ApostlesTripBtn">Upcoming Trips</button>
             </div>
             <div class="ui-body ui-body-a tour ui-corner-all" id="WineriesTour" tabindex="1">
                 <h1>Northeast Wineries Tour</h1>
                 <p class="tourDescription">A tour to various wineries in North East Victoria.</p>
                 <div id="WineriesMap" class="map transform"></div>
                 <p id="WineriesMapClick" class="MapClick"><i>Click to see map.</i></p>
-                <button id="WineriesTripBtn">View Trips</button>
+                <button id="WineriesTripBtn">Upcoming Trips</button>
             </div>
             <div class="ui-body ui-body-a tour ui-corner-all" id="MelbourneTour" tabindex="1">
                 <h1>Melbourne Sightseeing</h1>
                 <p class="tourDescription">Sight seeing across melbourne.</p>
                 <div id="MelbourneMap" class="map transform"></div>
                 <p id="MelbourneMapClick" class="MapClick"><i>Click to see map.</i></p>
-                <button id="MelbourneTripBtn">View Trips</button>
+
+                <div id="MelbourneTripBtn">
+                    <h5 class="ui-btn ui-btn-active tourBtn" id="testBtn" style="margin-bottom: 0;">Upcoming Trips</h5>
+                    <div class="upComingTrips" id="testClass" style="background-color: #7cc4e7">
+                        <ul data-role="listview" data-filter="true" class="tourTripList">
+                            <li><a>11-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>12-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>13-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>14-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                        </ul>
+                        <button class="ui-btn ui-mini" style="margin-top: 16px; margin-bottom: 0;">Next Page</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -204,7 +216,7 @@
 
 <div data-role="page" id="page5" data-add-back-btn="true">
     <div data-role="header">
-        <h1></h1>
+        <h1>TESTS</h1>
     </div>
     <div data-role="content" id="Page5content" class="">
         <img src="img/logo.png" class="LoginLogo">

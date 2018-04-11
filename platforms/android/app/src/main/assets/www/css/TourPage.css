@@ -16,6 +16,37 @@
     transition: opacity 1s ease;
 }
 
+.tourBtn{
+    border-radius: 1px;
+    transition: border-radius 5s ease;
+}
+
+.tourBtn-active{
+    border-radius: 15px 15px 0 0;
+}
+
+.upComingTrips{
+    width: 100%;
+    margin: auto;
+    max-height: 0;
+    visibility: hidden;
+    transition: max-height 2s ease, visibility 2s ease;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 0 0 5px 5px;
+    border-top: 0;
+    border-right: 1px;
+    border-bottom: 1px;
+    border-left: 1px;
+    border-color: #FF9800;
+    border-style: solid;
+}
+
+.upComingTrips-active{
+    max-height: 400px;
+    visibility: initial;
+}
+
 .MapClick{
     margin: 0;
     font-size: 0.9em;

@@ -24,9 +24,7 @@ $(function(){
         let loginPage = $("#page1");
         let toursPage = $("#page4");
 
-        homePage.live("pagebeforeshow", ()=>{
-            console.log("before home page");
-        });
+        homePage.live("pagebeforeshow", ()=>{});
 
 		homePage.live("pagebeforehide",()=>{});
 
@@ -44,6 +42,16 @@ $(function(){
             });
         });
 
-             
+        let page = document.getElementById("page4");
+        page.addEventListener("scroll", pageScrollEvent(page));
+
+        function pageScrollEvent(page){
+            let previous = page.scrollTop;
+            let header = page.firstElementChild.classList;
+            return function(){
+                page.scrollTop > previous ? header.add("header-up") : header.remove("header-up");
+                previous = page.scrollTop;
+            }
+        }
 });  // end document on pageinit
 ///////////////////////////////////////// END jquery On Document Ready

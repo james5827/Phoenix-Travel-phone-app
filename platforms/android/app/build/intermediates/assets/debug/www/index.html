@@ -76,12 +76,12 @@
     Login Page
 -->
 <div data-role="page" id="page1">
-    <div data-role="header">
+    <div data-role="header" class="header">
         <h1></h1>
     </div>
     <div data-role="content" id="Page1content" class="LoginContainer">
         <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <h1 class="title">Phoenix Travel</h1>
 
         <div class="LoginForm">
             <form action="">
@@ -103,8 +103,9 @@
     Register Page
 -->
 <div data-role="page" id="page2">
-    <div data-role="header" data-add-back-btn="true">
-        <h1>hello</h1>
+    <div data-role="header" class="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow"  data-role="button" role="button"></a>
+        <h1></h1>
     </div>
     <div data-role="content" id="Page2content" class="">
         <div class="ui-body ui-body-a ui-corner-all">
@@ -129,13 +130,14 @@
 <!--
     User Bookings
 -->
-<div data-role="page" id="page3" data-add-back-btn="true">
-    <div data-role="header">
+<div data-role="page" id="page3">
+    <div data-role="header" class="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"  data-role="button" role="button"></a>
         <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
         <h1></h1>
     </div>
     <div data-role="content" id="Page3content" class="">
-        <h1 class="LoginTitle">Your Bookings</h1>
+        <h1 class="title">Your Bookings</h1>
         <table data-role="table" class="ui-body-d ui-shadow table-stripe ui-responsive" id="tblBookings">
             <thead>
                 <tr>
@@ -164,13 +166,14 @@
 <!--
     Tours Page
 -->
-<div data-role="page" id="page4" data-add-back-btn="true">
-    <div data-role="header">
+<div data-role="page" id="page4">
+    <div data-role="header" class="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"  data-role="button" role="button"></a>
         <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
         <h1></h1>
     </div>
     <div data-role="content" id="Page4content">
-        <h1 class="LoginTitle">Tours</h1>
+        <h1 class="title">Tours</h1>
 
         <form>
             <input data-type="search" id="tourSearch" placeholder="Search A Tour"/>
@@ -182,33 +185,67 @@
                 <p class="tourDescription">A drive along the Great Ocean Road to the Twelve Apostles.</p>
                 <div id="ApostlesMap" class="map transform"></div>
                 <p id="ApostlesMapClick" class="MapClick"><i>Click to see map.</i></p>
-                <button>View Trips</button>
+                <div id="ApostlesTripBtn">
+                    <h5 class="ui-btn ui-btn-active tourBtn" style="margin-bottom: 0;">Upcoming Trips</h5>
+                    <div class="upComingTrips">
+                        <ul data-role="listview" data-filter="true" class="tourTripList">
+                            <li><a>11-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>12-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>13-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>14-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                        </ul>
+                        <button class="ui-btn ui-mini" style="margin-top: 16px; margin-bottom: 0;">Next Page</button>
+                    </div>
+                </div>
             </div>
             <div class="ui-body ui-body-a tour ui-corner-all" id="WineriesTour" tabindex="1">
                 <h1>Northeast Wineries Tour</h1>
                 <p class="tourDescription">A tour to various wineries in North East Victoria.</p>
                 <div id="WineriesMap" class="map transform"></div>
                 <p id="WineriesMapClick" class="MapClick"><i>Click to see map.</i></p>
-                <button>View Trips</button>
+                <div id="WineriesTripBtn">
+                    <h5 class="ui-btn ui-btn-active tourBtn" style="margin-bottom: 0;">Upcoming Trips</h5>
+                    <div class="upComingTrips">
+                        <ul data-role="listview" data-filter="true" class="tourTripList">
+                            <li><a>11-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>12-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>13-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>14-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                        </ul>
+                        <button class="ui-btn ui-mini" style="margin-top: 16px; margin-bottom: 0;">Next Page</button>
+                    </div>
+                </div>
             </div>
             <div class="ui-body ui-body-a tour ui-corner-all" id="MelbourneTour" tabindex="1">
                 <h1>Melbourne Sightseeing</h1>
                 <p class="tourDescription">Sight seeing across melbourne.</p>
                 <div id="MelbourneMap" class="map transform"></div>
                 <p id="MelbourneMapClick" class="MapClick"><i>Click to see map.</i></p>
-                <button>View Trips</button>
+
+                <div id="MelbourneTripBtn">
+                    <h5 class="ui-btn ui-btn-active tourBtn" style="margin-bottom: 0;">Upcoming Trips</h5>
+                    <div class="upComingTrips">
+                        <ul data-role="listview" data-filter="true" class="tourTripList">
+                            <li><a>11-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>12-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>13-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>14-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                        </ul>
+                        <button class="ui-btn ui-mini" style="margin-top: 16px; margin-bottom: 0;">Next Page</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div data-role="page" id="page5" data-add-back-btn="true">
+<div data-role="page" id="page5">
     <div data-role="header">
-        <h1></h1>
+        <h1>TESTS</h1>
     </div>
     <div data-role="content" id="Page5content" class="">
         <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <h1 class="title">Phoenix Travel</h1>
     </div>
 </div>
 
@@ -218,7 +255,7 @@
     </div>
     <div data-role="content" id="Page6content" class="">
         <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <h1 class="title">Phoenix Travel</h1>
     </div>
 </div>
 
@@ -228,7 +265,7 @@
     </div>
     <div data-role="content" id="Page7content" class="">
         <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <h1 class="title">Phoenix Travel</h1>
     </div>
 </div>
 
@@ -238,7 +275,7 @@
     </div>
     <div data-role="content" id="Page8content" class="">
         <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <h1 class="title">Phoenix Travel</h1>
     </div>
 </div>
 
@@ -248,11 +285,11 @@
     </div>
     <div data-role="content" id="Page9content" class="">
         <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <h1 class="title">Phoenix Travel</h1>
     </div>
 </div>
 
-<!--<script type="text/javascript" src="cordova.js"></script>-->
+<script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/tour.js"></script>
 <script type="text/javascript" src="js/main.js"></script>

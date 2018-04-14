@@ -1,13 +1,8 @@
 .LoginLogo{
     margin: auto;
+    margin-top: 30px;
     display: block;
     width: 65%;
-}
-
-.LoginTitle{
-    margin:auto;
-    font-weight: bolder;
-    font-size: 2em;
 }
 
 .LoginForm{

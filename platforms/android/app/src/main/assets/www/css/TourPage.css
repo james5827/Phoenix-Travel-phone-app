@@ -16,13 +16,32 @@
     transition: opacity 1s ease;
 }
 
+.tour:focus{
+    outline: none;
+    box-shadow: 0 0 5px #FF9800;
+}
+
 .tourBtn{
-    border-radius: 1px;
-    transition: border-radius 5s ease;
+    border-radius: 0;
+    transition: border-radius 3s ease;
 }
 
 .tourBtn-active{
     border-radius: 15px 15px 0 0;
+}
+
+.tourTripGrid{
+    margin: 16px 0 0 0;
+}
+
+.tourTripButtons{
+    margin: 0 !important;
+}
+
+.tourReviewBtn{
+    margin: 0;
+    border-radius: 0 !important;
+    background-color: #ff7c23 !important;
 }
 
 .upComingTrips{
@@ -34,12 +53,10 @@
     overflow: hidden;
     box-sizing: border-box;
     border-radius: 0 0 5px 5px;
-    border-top: 0;
-    border-right: 1px;
-    border-bottom: 1px;
-    border-left: 1px;
+    border-width: 0 1px 1px 1px;
     border-color: #FF9800;
     border-style: solid;
+    background-color: #FF9800;
 }
 
 .upComingTrips-active{

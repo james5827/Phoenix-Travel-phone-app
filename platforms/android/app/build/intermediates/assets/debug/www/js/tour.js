@@ -26,15 +26,19 @@ function initMap(){
 (function initTourEvents(){
     let tourPage = document.getElementById("page4");
     let tours = Array.from(document.getElementsByClassName("tour"));
+
+    //Tour Scroll Event
     tourPage.addEventListener("scroll", ()=>{
         tours.forEach((tour)=>{
-            if(window.innerHeight > tour.getBoundingClientRect().bottom)
+            if(window.innerHeight > tour.getBoundingClientRect().bottom
+                && 0 < tour.getBoundingClientRect().top || tour.contains(document.activeElement) || tour === document.activeElement)
                 tour.classList.add("transform-visible");
             else
                 tour.classList.remove("transform-visible");
         });
     });
 
+    //Tour Filter Event
     $("#filterableTour").filterable({
         filter: function(event, ui) {
             let test = Array.from(ui.items);
@@ -48,28 +52,64 @@ function initMap(){
         }
     });
 
+    //Tour Divs
     let apostlesTour = document.getElementById("ApostlesTour");
     let wineriesTour = document.getElementById("WineriesTour");
     let melbourneTour = document.getElementById("MelbourneTour");
-    
-    apostlesTour.addEventListener("click", mapEvent(document.getElementById("ApostlesMap")));
-    apostlesTour.addEventListener("blur", mapBlurEvent(document.getElementById("ApostlesMap")));
 
-    wineriesTour.addEventListener("click", mapEvent(document.getElementById("WineriesMap")));
-    wineriesTour.addEventListener("blur", mapBlurEvent(document.getElementById("WineriesMap")));
+    //Map Divs
+    let apostlesMap = document.getElementById("ApostlesMap");
+    let wineriesMap = document.getElementById("WineriesMap");
+    let melbourneMap = document.getElementById("MelbourneMap");
 
-    melbourneTour.addEventListener("click", mapEvent(document.getElementById("MelbourneMap")));
-    melbourneTour.addEventListener("blur", mapBlurEvent(document.getElementById("MelbourneMap")));
+    //View Trip Buttons
+    let apostlesViewBtn = document.getElementById("ApostlesTripBtn");
+    let wineriesViewBtn = document.getElementById("WineriesTripBtn");
+    let melbourneViewBtn = document.getElementById("MelbourneTripBtn");
+
+    let upcomingTripsBtns = Array.from(document.getElementsByClassName("tourBtn"));
+
+    upcomingTripsBtns.forEach((btn) => {
+        btn.addEventListener("click", ()=>{
+            let upcomingTrips = btn.nextElementSibling;
+            upcomingTrips.classList.toggle("upComingTrips-active");
+            btn.classList.toggle("tourBtn-active");
+        });
+    });
+
+    apostlesTour.addEventListener("click", mapEvent(apostlesMap));
+    apostlesTour.addEventListener("mouseleave", mapBlurEvent(apostlesMap));
+
+    wineriesTour.addEventListener("click", mapEvent(wineriesMap));
+    wineriesTour.addEventListener("mouseleave", mapBlurEvent(wineriesMap));
+
+    melbourneTour.addEventListener("click", mapEvent(melbourneMap));
+    melbourneTour.addEventListener("mouseleave", mapBlurEvent(melbourneMap));
+
+    apostlesMap.addEventListener("click", (e)=>{e.stopPropagation()});
+    wineriesMap.addEventListener("click", (e)=>{e.stopPropagation()});
+    melbourneMap.addEventListener("click", (e)=>{e.stopPropagation()});
+
+    apostlesViewBtn.addEventListener("click", (e)=>viewBtnEvent(apostlesViewBtn, e));
+    wineriesViewBtn.addEventListener("click", (e)=>viewBtnEvent(wineriesViewBtn, e));
+    melbourneViewBtn.addEventListener("click", (e)=>viewBtnEvent(melbourneViewBtn, e));
 })();
 
 function mapEvent(node){
     return function(){
         node.classList.toggle("transform-active");
+        node.parentElement.classList.add("transform-visible");
     }
 }
 
 function mapBlurEvent(node){
     return function(){
         node.classList.remove("transform-active");
+        node.parentElement.lastElementChild.firstElementChild.classList.remove("tourBtn-active");
+        node.parentElement.lastElementChild.lastElementChild.classList.remove("upComingTrips-active");
     }
+}
+
+function viewBtnEvent(node, e){
+    e.stopPropagation();
 }

@@ -31,7 +31,7 @@ function initMap(){
     tourPage.addEventListener("scroll", ()=>{
         tours.forEach((tour)=>{
             if(window.innerHeight > tour.getBoundingClientRect().bottom
-                && 0 < tour.getBoundingClientRect().top || tour === document.activeElement)
+                && 0 < tour.getBoundingClientRect().top || tour.contains(document.activeElement) || tour === document.activeElement)
                 tour.classList.add("transform-visible");
             else
                 tour.classList.remove("transform-visible");
@@ -67,28 +67,31 @@ function initMap(){
     let wineriesViewBtn = document.getElementById("WineriesTripBtn");
     let melbourneViewBtn = document.getElementById("MelbourneTripBtn");
 
-    let testBtn = document.getElementById("testBtn");
-    testBtn.addEventListener("click", (e)=>{
-        let test = document.getElementById("testClass");
-        test.classList.toggle("upComingTrips-active");
-        testBtn.classList.toggle("tourBtn-active");
+    let upcomingTripsBtns = Array.from(document.getElementsByClassName("tourBtn"));
+
+    upcomingTripsBtns.forEach((btn) => {
+        btn.addEventListener("click", ()=>{
+            let upcomingTrips = btn.nextElementSibling;
+            upcomingTrips.classList.toggle("upComingTrips-active");
+            btn.classList.toggle("tourBtn-active");
+        });
     });
 
     apostlesTour.addEventListener("click", mapEvent(apostlesMap));
-    apostlesTour.addEventListener("blur", (e)=>mapBlurEvent(apostlesMap, e));
+    apostlesTour.addEventListener("mouseleave", mapBlurEvent(apostlesMap));
 
     wineriesTour.addEventListener("click", mapEvent(wineriesMap));
-    wineriesTour.addEventListener("blur", (e)=>mapBlurEvent(wineriesMap, e));
+    wineriesTour.addEventListener("mouseleave", mapBlurEvent(wineriesMap));
 
     melbourneTour.addEventListener("click", mapEvent(melbourneMap));
-    melbourneTour.addEventListener("blur", (e) => mapBlurEvent(melbourneMap, e));
+    melbourneTour.addEventListener("mouseleave", mapBlurEvent(melbourneMap));
 
     apostlesMap.addEventListener("click", (e)=>{e.stopPropagation()});
     wineriesMap.addEventListener("click", (e)=>{e.stopPropagation()});
     melbourneMap.addEventListener("click", (e)=>{e.stopPropagation()});
 
-    apostlesViewBtn.addEventListener("click", (e)=>viewBtnEvent(apostlesViewBtn, e), true);
-    wineriesViewBtn.addEventListener("click", (e)=>viewBtnEvent(wineriesViewBtn, e), true);
+    apostlesViewBtn.addEventListener("click", (e)=>viewBtnEvent(apostlesViewBtn, e));
+    wineriesViewBtn.addEventListener("click", (e)=>viewBtnEvent(wineriesViewBtn, e));
     melbourneViewBtn.addEventListener("click", (e)=>viewBtnEvent(melbourneViewBtn, e));
 })();
 
@@ -99,11 +102,12 @@ function mapEvent(node){
     }
 }
 
-function mapBlurEvent(node, e){
-    if(!node.parentNode.contains(e.relatedTarget))
+function mapBlurEvent(node){
+    return function(){
         node.classList.remove("transform-active");
-    else
-        node.parentElement.focus();
+        node.parentElement.lastElementChild.firstElementChild.classList.remove("tourBtn-active");
+        node.parentElement.lastElementChild.lastElementChild.classList.remove("upComingTrips-active");
+    }
 }
 
 function viewBtnEvent(node, e){

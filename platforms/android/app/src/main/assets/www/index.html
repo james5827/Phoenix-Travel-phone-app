@@ -23,21 +23,26 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link href="jquery-mobile/jquery.mobile-1.4.2.min.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="css/themes/my-custom-theme.css" />
-    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="jquery-mobile/jquery.mobile-1.4.2.min.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/my-custom-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/jquery.mobile.icons.min.css">
     <link rel="stylesheet" type="text/css" href="css/LoginPage.css">
     <link rel="stylesheet" type="text/css" href="css/RegistrationPage.css">
     <link rel="stylesheet" type="text/css" href="css/universal.css">
     <link rel="stylesheet" type="text/css" href="css/BookingsPage.css">
     <link rel="stylesheet" type="text/css" href="css/TourPage.css">
+    <link rel="stylesheet" type="text/css" href="css/BookTrip.css">
+    <link rel="stylesheet" type="text/css" href="css/Review.css">
     <script src="jquery-mobile/jquery-1.7.2.min.js" type="text/javascript"></script>
     <script src="jquery-mobile/jquery.mobile-1.4.2.min.js" type="text/javascript"></script>
     <title>Hello World</title>
 </head>
 <body>
-<div data-role="page" id="homepage"><!--
-    --><div data-role="header">
+<!--
+    Test Nav
+-->
+<div data-role="page" id="homepage">
+    <div data-role="header">
         <h1 id='idh'>FOR TESTING PURPOSES ONLY</h1>
     </div>
     <div data-role="content">
@@ -76,22 +81,21 @@
     Login Page
 -->
 <div data-role="page" id="page1">
-    <div data-role="header">
+    <div data-role="header" class="header">
         <h1></h1>
     </div>
     <div data-role="content" id="Page1content" class="LoginContainer">
         <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <h1 class="title">Phoenix Travel</h1>
 
         <div class="LoginForm">
             <form action="">
-                <div data-role="form-group">
+                <div data-role="fieldcontain">
                     <input type="text" name="username" placeholder="Username">
                 </div>
-                <div>
+                <div data-role="fieldcontain">
                     <input type="password" name="password" placeholder="Password">
                 </div>
-                <hr>
                 <button class="LoginButton" type="submit">Login</button>
             </form>
             <a href="#page2" data-role="button">Register</a>
@@ -103,13 +107,14 @@
     Register Page
 -->
 <div data-role="page" id="page2">
-    <div data-role="header" data-add-back-btn="true">
-        <h1>hello</h1>
+    <div data-role="header" class="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all"  data-role="button" role="button"></a>
+        <h1></h1>
     </div>
     <div data-role="content" id="Page2content" class="">
         <div class="ui-body ui-body-a ui-corner-all">
             <form id="RegistrationForm">
-                <h1 style="font-weight: bolder;">Registration</h1>
+                <h1 class="title">Registration</h1>
                 <div class="ui-field-contain">
                     <input type="text" name="username" id="username" placeholder="Username" value="">
                     <input type="text" name="name" id="name" placeholder="Full Name: James A O'Neill" value="">
@@ -129,68 +134,105 @@
 <!--
     User Bookings
 -->
-<div data-role="page" id="page3" data-add-back-btn="true">
-    <div data-role="header">
+<div data-role="page" id="page3">
+    <div data-role="header" class="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"  data-role="button" role="button"></a>
         <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
         <h1></h1>
     </div>
     <div data-role="content" id="Page3content" class="">
-        <h1 class="LoginTitle">Your Bookings</h1>
-        <table data-role="table" class="ui-body-d ui-shadow table-stripe ui-responsive" id="tblBookings">
-            <thead>
-                <tr>
-                    <th>Booking Number</th>
-                    <th>Tour Name</th>
-                    <th>Departure Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Twelve Apostles Drive</td>
-                    <td>12/12/2012</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Los Angles</td>
-                    <td>13/12/2012</td>
-                </tr>
-            </tbody>
-        </table>
-        <a href="#page4" data-role="button">View Tours</a>
+        <div class="ui-body ui-body-a">
+            <h1 class="title">Your Bookings</h1>
+            <table data-role="table" class="ui-body-d ui-shadow table-stripe ui-responsive" id="tblBookings">
+                <thead>
+                    <tr>
+                        <th>Booking Number</th>
+                        <th>Tour Name</th>
+                        <th>Departure Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Twelve Apostles Drive</td>
+                        <td>12/12/2012</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Los Angles</td>
+                        <td>13/12/2012</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="#page4" data-role="button">View Tours</a>
+        </div>
     </div>
 </div>
 
 <!--
     Tours Page
 -->
-<div data-role="page" id="page4" data-add-back-btn="true">
-    <div data-role="header">
+<div data-role="page" id="page4">
+    <div data-role="header" class="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"  data-role="button" role="button"></a>
         <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
         <h1></h1>
     </div>
     <div data-role="content" id="Page4content">
-        <h1 class="LoginTitle">Tours</h1>
+        <h1 class="title">Tours</h1>
 
         <form>
             <input data-type="search" id="tourSearch" placeholder="Search A Tour"/>
         </form>
 
         <div class="elements" id="filterableTour" data-filter="true" data-input="#tourSearch">
+
             <div class="ui-body ui-body-a tour ui-corner-all" id="ApostlesTour" tabindex="1">
                 <h1>Twelve Apostles Drive</h1>
                 <p class="tourDescription">A drive along the Great Ocean Road to the Twelve Apostles.</p>
                 <div id="ApostlesMap" class="map transform"></div>
                 <p id="ApostlesMapClick" class="MapClick"><i>Click to see map.</i></p>
-                <button id="ApostlesTripBtn">Upcoming Trips</button>
+                <div id="ApostlesTripBtn">
+                    <h5 class="ui-btn ui-btn-active tourBtn" style="margin-bottom: 0;">Upcoming Trips</h5>
+                    <div class="upComingTrips">
+                        <ul data-role="listview" data-filter="true" class="tourTripList">
+                            <li><a>11-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>12-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>13-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>14-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                        </ul>
+                        <div class="ui-grid-a tourTripGrid">
+                            <div class="ui-block-a"><a href="#" class="ui-btn ui-btn-mini ui-shadow tourTripButtons">Previous</a></div>
+                            <div class="ui-block-b"><a href="#" class="ui-btn ui-btn-mini ui-shadow tourTripButtons">Next</a></div>
+                        </div>
+                        <button class="tourReviewBtn ui-btn-active">Reviews</button>
+                    </div>
+                </div>
             </div>
+
             <div class="ui-body ui-body-a tour ui-corner-all" id="WineriesTour" tabindex="1">
                 <h1>Northeast Wineries Tour</h1>
                 <p class="tourDescription">A tour to various wineries in North East Victoria.</p>
                 <div id="WineriesMap" class="map transform"></div>
                 <p id="WineriesMapClick" class="MapClick"><i>Click to see map.</i></p>
-                <button id="WineriesTripBtn">Upcoming Trips</button>
+                <div id="WineriesTripBtn">
+                    <h5 class="ui-btn ui-btn-active tourBtn" style="margin-bottom: 0;">Upcoming Trips</h5>
+                    <div class="upComingTrips">
+                        <ul data-role="listview" data-filter="true" class="tourTripList">
+                            <li><a>11-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>12-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>13-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                            <li><a>14-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
+                        </ul>
+                        <div class="ui-grid-a tourTripGrid">
+                            <div class="ui-block-a"><a href="#" class="ui-btn ui-btn-mini ui-shadow tourTripButtons">Previous</a></div>
+                            <div class="ui-block-b"><a href="#" class="ui-btn ui-btn-mini ui-shadow tourTripButtons">Next</a></div>
+                        </div>
+                        <button class="tourReviewBtn ui-btn-active">Reviews</button>
+                    </div>
+                </div>
             </div>
+
             <div class="ui-body ui-body-a tour ui-corner-all" id="MelbourneTour" tabindex="1">
                 <h1>Melbourne Sightseeing</h1>
                 <p class="tourDescription">Sight seeing across melbourne.</p>
@@ -198,15 +240,19 @@
                 <p id="MelbourneMapClick" class="MapClick"><i>Click to see map.</i></p>
 
                 <div id="MelbourneTripBtn">
-                    <h5 class="ui-btn ui-btn-active tourBtn" id="testBtn" style="margin-bottom: 0;">Upcoming Trips</h5>
-                    <div class="upComingTrips" id="testClass" style="background-color: #7cc4e7">
+                    <h5 class="ui-btn ui-btn-active tourBtn" style="margin-bottom: 0;">Upcoming Trips</h5>
+                    <div class="upComingTrips">
                         <ul data-role="listview" data-filter="true" class="tourTripList">
                             <li><a>11-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
                             <li><a>12-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
                             <li><a>13-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
                             <li><a>14-04-2018 <span class="tripPositionSpan">2 - positions left</span></a></li>
                         </ul>
-                        <button class="ui-btn ui-mini" style="margin-top: 16px; margin-bottom: 0;">Next Page</button>
+                        <div class="ui-grid-a tourTripGrid">
+                            <div class="ui-block-a"><a href="#" class="ui-btn ui-btn-mini ui-shadow tourTripButtons">Previous</a></div>
+                            <div class="ui-block-b"><a href="#" class="ui-btn ui-btn-mini ui-shadow tourTripButtons">Next</a></div>
+                        </div>
+                        <button class="tourReviewBtn ui-btn-active">Reviews</button>
                     </div>
                 </div>
             </div>
@@ -214,33 +260,165 @@
     </div>
 </div>
 
-<div data-role="page" id="page5" data-add-back-btn="true">
-    <div data-role="header">
-        <h1>TESTS</h1>
+<!--
+    Book Trip Page
+-->
+<div data-role="page" id="page5">
+    <div data-role="header" class="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"  data-role="button" role="button"></a>
+        <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
+        <h1></h1>
     </div>
     <div data-role="content" id="Page5content" class="">
-        <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <div class="ui-body ui-body-a ui-corner-all" style="min-height: 80vh">
+            <h1 class="title">Book Trip</h1>
+            <h2>Trip Details</h2>
+
+            <div data-role="fieldcontain">
+                <label for="bookingTourName" class="bookingLabel">Tour Name:</label>
+                <input type="text" value="Twelve Apostles" id="bookingTourName" readonly>
+            </div>
+
+            <div data-role="fieldcontain">
+                <label for="bookingTripDate" class="bookingLabel">Trip Date:</label>
+                <input type="text" value="12/05/2018" id="bookingTripDate" readonly>
+            </div>
+
+            <div data-role="fieldcontain">
+                <label for="bookingDepositAmount" class="bookingLabel">Deposit:</label>
+                <input type="text" value="$100.00" id="bookingDepositAmount" readonly>
+            </div>
+
+            <div data-role="fieldcontain">
+                <h3 style="font-weight: bold;">Itinerary</h3>
+                <table data-role="table" class="ui-body-d ui-shadow table-stripe ui-responsive">
+                    <thead>
+                        <tr>
+                            <th>Day One:</th>
+                            <th style="margin: 0;">Activities:</th>
+                            <th>Meals:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>Guided tour around the CBD</td>
+                            <td>Lunch On Lygon Street</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ui-bar ui-bar-a">
+                <h3>Additional Passengers</h3>
+            </div>
+            <div class="ui-body ui-body-a">
+                <form>
+                    <input type="search" id="addCustomersSearch" placeholder="Invite">
+                </form>
+                <ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-input="#addCustomersSearch" id="testman">
+                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">John</a></li>
+                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">James</a></li>
+                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">Janet</a></li>
+                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">Jerry</a></li>
+                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">Jones</a></li>
+                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">Jeremy</a></li>
+                </ul>
+                <ul class="ActiveAddCustomers" id="Add">
+                </ul>
+            </div>
+
+            <form>
+                <button>Book</button>
+            </form>
+        </div>
     </div>
 </div>
 
+<!--
+    Account Page
+-->
 <div data-role="page" id="page6" data-add-back-btn="true">
-    <div data-role="header">
+    <div data-role="header" class="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"  data-role="button" role="button"></a>
+        <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
         <h1></h1>
     </div>
     <div data-role="content" id="Page6content" class="">
-        <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <div class="ui-body ui-body-a">
+            <h1 class="title">Account</h1>
+        </div>
     </div>
 </div>
 
+<!--
+    Trip Reviews
+-->
 <div data-role="page" id="page7" data-add-back-btn="true">
-    <div data-role="header">
+    <div data-role="header" class="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"  data-role="button" role="button"></a>
+        <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
         <h1></h1>
     </div>
     <div data-role="content" id="Page7content" class="">
-        <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <h1 class="title">Twelve Apostles Drive</h1>
+
+        <div class="ui-body ui-body-a">
+            <button class="">Write A Review</button>
+            <form>
+                <div data-role="fieldcontain">
+                    <textarea id="generalFeedBack" placeholder="General Feedback:"></textarea>
+                </div>
+                <div data-role="fieldcontain">
+                    <textarea id="likes" placeholder="Likes:"></textarea>
+                </div>
+                <div data-role="fieldcontain">
+                    <textarea id="dislikes" placeholder="Dislikes"></textarea>
+                </div>
+                <div data-role="fieldcontain">
+                    <label>Rating:</label>
+                    <div class="ui-grid-d center">
+                        <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                        <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                        <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                        <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                        <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                    </div>
+                </div>
+                <button>Clear</button>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <br>
+
+        <div class="ui-body ui-body-a review">
+            <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+            <p class="author">&mdash; James O'Neill 11/11/2012</p>
+            <!-- Stars -->
+            <div class="reviewHidden">
+                <div class="ui-grid-d center">
+                    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <h3 style="margin: 0;">Likes</h3>
+                        <div class="likes">
+                            <p>The whole trip was very reasonably priced.</p>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <h3 style="margin: 0;">Dislikes</h3>
+                        <div class="dislikes">
+                            <p>None!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -250,7 +428,7 @@
     </div>
     <div data-role="content" id="Page8content" class="">
         <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <h1 class="title">Phoenix Travel</h1>
     </div>
 </div>
 
@@ -260,13 +438,14 @@
     </div>
     <div data-role="content" id="Page9content" class="">
         <img src="img/logo.png" class="LoginLogo">
-        <h1 class="LoginTitle">Phoenix Travel</h1>
+        <h1 class="title">Phoenix Travel</h1>
     </div>
 </div>
 
 <!--<script type="text/javascript" src="cordova.js"></script>-->
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/tour.js"></script>
+<script type="text/javascript" src="js/tripBooking.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA5aMge2ksCksF5BqYiff8gczkr-qcvrI&callback=initMap" type="text/javascript"></script>
 </body>

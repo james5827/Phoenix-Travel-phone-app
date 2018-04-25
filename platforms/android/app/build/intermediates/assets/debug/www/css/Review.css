@@ -35,8 +35,6 @@
 
 #reviewForm{
     max-height: 0;
-    overflow: hidden;
-    transition: max-height 1s ease;
 }
 
 .likes{

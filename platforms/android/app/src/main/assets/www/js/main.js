@@ -23,6 +23,7 @@ $(function(){
         let homePage= $("#homepage");
         let loginPage = $("#page1");
         let toursPage = $("#page4");
+        let reviewPage = $("#page7");
 
         homePage.live("pagebeforeshow", ()=>{});
 
@@ -42,8 +43,21 @@ $(function(){
             });
         });
 
-        let page = document.getElementById("page4");
-        page.addEventListener("scroll", pageScrollEvent(page));
+     	reviewPage.live("pageshow", ()=>{
+            let reviews = Array.from(document.getElementsByClassName("review"));
+            reviews.forEach((review)=>{
+                if(window.innerHeight > review.getBoundingClientRect().bottom
+                    && 0 < review.getBoundingClientRect().top || review.contains(document.activeElement) || review === document.activeElement)
+                    review.classList.add("reviewTransform");
+                else
+                    review.classList.remove("reviewTransform");
+            });
+        });
+
+        let tourHeader = document.getElementById("page4");
+        tourHeader.addEventListener("scroll", pageScrollEvent(tourHeader));
+        let reviewHeader = document.getElementById("page7");
+        reviewHeader.addEventListener("scroll", pageScrollEvent(reviewHeader));
 
         function pageScrollEvent(page){
             let previous = page.scrollTop;

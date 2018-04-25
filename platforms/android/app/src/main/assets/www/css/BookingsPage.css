@@ -10,3 +10,21 @@
 #tblBookings tbody tr:hover{
     background-color: #e2e2e2;
 }
+
+#homeFooter{
+    border-top: 1px lightgray solid;
+    border-bottom: 1px lightgray solid;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+#Page3content{
+    margin-bottom: 2em;
+}
+
+.invisibleTab{
+    display: none;
+}
+
+

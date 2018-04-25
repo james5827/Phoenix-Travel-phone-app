@@ -33,6 +33,8 @@
     <link rel="stylesheet" type="text/css" href="css/TourPage.css">
     <link rel="stylesheet" type="text/css" href="css/BookTrip.css">
     <link rel="stylesheet" type="text/css" href="css/Review.css">
+    <link rel="stylesheet" type="text/css" href="css/UserReviewPage.css">
+    <link rel="stylesheet" type="text/css" href="css/AccountPage.css">
     <script src="jquery-mobile/jquery-1.7.2.min.js" type="text/javascript"></script>
     <script src="jquery-mobile/jquery.mobile-1.4.2.min.js" type="text/javascript"></script>
     <title>Hello World</title>
@@ -53,8 +55,8 @@
             <li><a href="#page4">Tours</a></li>
             <li><a href="#page5">Trips</a></li>
             <li><a href="#page6">Account</a></li>
-            <li><a href="#page7">Home</a></li>
-            <li><a href="#page8">Home</a></li>
+            <li><a href="#page7">Reviews</a></li>
+            <li><a href="#page8">User Reviews</a></li>
             <li><a href="#page9">Home</a></li>
         </ul>
     </div>
@@ -69,7 +71,7 @@
         <img src="img/logo.png" class="LoginLogo">
         <ul data-role="listview" data-inset="true">
             <li data-icon="home"><a href="#page3">Home</a></li>
-            <li data-icon="false"><a href="#page4">Tours</a></li>
+            <li data-icon="info"><a href="#page4">Tours</a></li>
             <li data-icon="user"><a>Account</a></li>
             <li data-icon="back"><a>Logout</a></li>
             <li data-icon="delete"><a data-rel="close">Close</a></li>
@@ -135,14 +137,16 @@
     User Bookings
 -->
 <div data-role="page" id="page3">
-    <div data-role="header" class="header">
+    <div data-role="header" class="header" style="border-bottom: 0;">
         <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"  data-role="button" role="button"></a>
         <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
         <h1></h1>
     </div>
     <div data-role="content" id="Page3content" class="">
-        <div class="ui-body ui-body-a">
-            <h1 class="title">Your Bookings</h1>
+        <h1 class="title">Home</h1>
+
+        <div class="ui-body ui-body-a" id="bookingsDiv">
+            <h1>Your Bookings</h1>
             <table data-role="table" class="ui-body-d ui-shadow table-stripe ui-responsive" id="tblBookings">
                 <thead>
                     <tr>
@@ -165,6 +169,25 @@
                 </tbody>
             </table>
             <a href="#page4" data-role="button">View Tours</a>
+        </div>
+
+        <div class="ui-body ui-body-a invisibleTab" id="historyDiv">
+            <h1>History</h1>
+        </div>
+
+        <div class="ui-body ui-body-a invisibleTab" id="invitesDiv">
+            <h1>Invites</h1>
+
+        </div>
+
+    </div>
+    <div data-role="footer" id="homeFooter">
+        <div data-role="navbar">
+            <ul>
+                <li><a id="invitesTab" class="ui-icon-mail ui-btn-icon-top">Invites</a></li>
+                <li><a id="bookingsTab" class="ui-btn-active ui-icon-calendar ui-btn-icon-top">Bookings</a></li>
+                <li><a id="historyTab" class="ui-icon-clock ui-btn-icon-top">History</a></li>
+            </ul>
         </div>
     </div>
 </div>
@@ -346,7 +369,87 @@
     </div>
     <div data-role="content" id="Page6content" class="">
         <div class="ui-body ui-body-a">
-            <h1 class="title">Account</h1>
+            <h1 class="title">Account Details</h1>
+            <div data-role="fieldcontain">
+                <label for="accountId">Customer Id:</label>
+                <input type="text" id="accountId" value="001484">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="accountName">Name:</label>
+                <div data-role="collapsible" id="accountName" data-collapsed-icon="gear" data-expanded-icon="gear">
+                    <h4>
+                        <span id="spanFirst">William</span>
+                        <span id="spanMiddleInitial">B</span>
+                        <span id="spanLast">Pitt</span>
+                    </h4>
+
+                    <div data-role="fieldcontain">
+                        <label for="accountFirst">First Name:</label>
+                        <input type="text" value="William" id="accountFirst">
+                    </div>
+
+                    <div data-role="fieldcontain">
+                        <label for="accountInitial">Middle Initial:</label>
+                        <input type="text" value="B" id="accountInitial">
+                    </div>
+
+                    <div data-role="fieldcontain">
+                    <label for="accountLast">Last Name:</label>
+                    <input type="text" value="Pitt" id="accountLast">
+                    </div>
+                </div>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="accountEmail">Email:</label>
+                <input type="text" id="accountEmail" value="bill.pitt@gail.com">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="accountPhone">Phone:</label>
+                <input type="text" id="accountPhone" value="351806451">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="accountAddress">Address</label>
+                <div data-role="collapsible" id="accountAddress" data-collapsed-icon="gear" data-expanded-icon="gear">
+                    <h4>
+                        <span id="spanStreetNo">200</span>
+                        <span id="spanStreetName">St. Kilda Road</span>
+                        <span id="spanSuburb">St. Kilda</span>
+                        <span id="spanPostcode">3147</span>
+                    </h4>
+
+                    <div data-role="fieldcontain">
+                        <label for="accountStreetNo">Street Number:</label>
+                        <input type="text" value="200" id="accountStreetNo">
+                    </div>
+
+                    <div data-role="fieldcontain">
+                        <label for="accountStreetName">Street Name:</label>
+                        <input type="text" value="St. Kilda Road" id="accountStreetName">
+                    </div>
+
+                    <div data-role="fieldcontain">
+                        <label for="accountSuburb">Suburb:</label>
+                        <input type="text" value="St. Kilda" id="accountSuburb">
+                    </div>
+
+                    <div data-role="fieldcontain">
+                        <label for="accountPostCode">Postcode:</label>
+                        <input type="text" value="3147" id="accountPostCode">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="padding-right: 5px">
+                    <button>Reviews</button>
+                </div>
+                <div class="ui-block-b" style="padding-left: 5px">
+                    <button>Bookings</button>
+                </div>
+            </div>
+
+            <button>Reset</button>
+            <button>Save</button>
         </div>
     </div>
 </div>
@@ -364,8 +467,8 @@
         <h1 class="title">Twelve Apostles Drive</h1>
 
         <div class="ui-body ui-body-a">
-            <button class="">Write A Review</button>
-            <form>
+            <button id="formRevealBtn">Write A Review</button>
+            <form id="reviewForm">
                 <div data-role="fieldcontain">
                     <textarea id="generalFeedBack" placeholder="General Feedback:"></textarea>
                 </div>
@@ -378,11 +481,11 @@
                 <div data-role="fieldcontain">
                     <label>Rating:</label>
                     <div class="ui-grid-d center">
-                        <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
-                        <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
-                        <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
-                        <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
-                        <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                        <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline star"></a></div>
+                        <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline star"></a></div>
+                        <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline star"></a></div>
+                        <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline star"></a></div>
+                        <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline star"></a></div>
                     </div>
                 </div>
                 <button>Clear</button>
@@ -391,9 +494,185 @@
         </div>
         <br>
 
+        <!--Dummy Reviews-->
         <div class="ui-body ui-body-a review">
             <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
             <p class="author">&mdash; James O'Neill 11/11/2012</p>
+            <p class="tapReview">Tap to toggle information</p>
+            <!-- Stars -->
+            <div class="reviewHidden">
+                <div class="ui-grid-d center">
+                    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <h3 style="margin: 0;">Likes</h3>
+                        <div class="likes">
+                            <p>The whole trip was very reasonably priced.</p>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <h3 style="margin: 0;">Dislikes</h3>
+                        <div class="dislikes">
+                            <p>None!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-body ui-body-a review">
+            <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+            <p class="author">&mdash; James O'Neill 11/11/2012</p>
+            <p class="tapReview">Tap to toggle information</p>
+            <!-- Stars -->
+            <div class="reviewHidden">
+                <div class="ui-grid-d center">
+                    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <h3 style="margin: 0;">Likes</h3>
+                        <div class="likes">
+                            <p>The whole trip was very reasonably priced.</p>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <h3 style="margin: 0;">Dislikes</h3>
+                        <div class="dislikes">
+                            <p>None!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-body ui-body-a review">
+            <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+            <p class="author">&mdash; James O'Neill 11/11/2012</p>
+            <p class="tapReview">Tap to toggle information</p>
+            <!-- Stars -->
+            <div class="reviewHidden">
+                <div class="ui-grid-d center">
+                    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <h3 style="margin: 0;">Likes</h3>
+                        <div class="likes">
+                            <p>The whole trip was very reasonably priced.</p>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <h3 style="margin: 0;">Dislikes</h3>
+                        <div class="dislikes">
+                            <p>None!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-body ui-body-a review">
+            <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+            <p class="author">&mdash; James O'Neill 11/11/2012</p>
+            <p class="tapReview">Tap to toggle information</p>
+            <!-- Stars -->
+            <div class="reviewHidden">
+                <div class="ui-grid-d center">
+                    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <h3 style="margin: 0;">Likes</h3>
+                        <div class="likes">
+                            <p>The whole trip was very reasonably priced.</p>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <h3 style="margin: 0;">Dislikes</h3>
+                        <div class="dislikes">
+                            <p>None!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-body ui-body-a review">
+            <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+            <p class="author">&mdash; James O'Neill 11/11/2012</p>
+            <p class="tapReview">Tap to toggle information</p>
+            <!-- Stars -->
+            <div class="reviewHidden">
+                <div class="ui-grid-d center">
+                    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <h3 style="margin: 0;">Likes</h3>
+                        <div class="likes">
+                            <p>The whole trip was very reasonably priced.</p>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <h3 style="margin: 0;">Dislikes</h3>
+                        <div class="dislikes">
+                            <p>None!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-body ui-body-a review">
+            <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+            <p class="author">&mdash; James O'Neill 11/11/2012</p>
+            <p class="tapReview">Tap to toggle information</p>
+            <!-- Stars -->
+            <div class="reviewHidden">
+                <div class="ui-grid-d center">
+                    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                    <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <h3 style="margin: 0;">Likes</h3>
+                        <div class="likes">
+                            <p>The whole trip was very reasonably priced.</p>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <h3 style="margin: 0;">Dislikes</h3>
+                        <div class="dislikes">
+                            <p>None!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-body ui-body-a review">
+            <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+            <p class="author">&mdash; James O'Neill 11/11/2012</p>
+            <p class="tapReview">Tap to toggle information</p>
             <!-- Stars -->
             <div class="reviewHidden">
                 <div class="ui-grid-d center">
@@ -422,13 +701,156 @@
     </div>
 </div>
 
+<!--User Reviews-->
 <div data-role="page" id="page8" data-add-back-btn="true">
-    <div data-role="header">
+    <div data-role="header" class="header">
         <h1></h1>
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all"  data-role="button" role="button"></a>
+        <a href="#myPanel" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-notext ui-icon-bars"></a>
     </div>
     <div data-role="content" id="Page8content" class="">
-        <img src="img/logo.png" class="LoginLogo">
-        <h1 class="title">Phoenix Travel</h1>
+        <h1 class="title">Your Reviews</h1>
+        <form>
+            <input data-type="search" id="reviewSearch" placeholder="Search Your Reviews"/>
+        </form>
+
+        <div class="elements" id="filterableUserReviews" data-filter="true" data-input="#reviewSearch">
+            <div class="ui-body ui-body-a userTourReviews">
+                <h2>Twelve Apostles</h2>
+                <div class="ui-body ui-body-a review">
+                    <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+                    <p class="author">&mdash; James O'Neill 11/11/2012</p>
+                    <p class="tapReview">Tap to toggle information</p>
+                    <!-- Stars -->
+                    <div class="reviewHidden">
+                        <div class="ui-grid-d center">
+                            <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <h3 style="margin: 0;">Likes</h3>
+                                <div class="likes">
+                                    <p>The whole trip was very reasonably priced.</p>
+                                </div>
+                            </div>
+                            <div class="ui-block-b">
+                                <h3 style="margin: 0;">Dislikes</h3>
+                                <div class="dislikes">
+                                    <p>None!</p>
+                                </div>
+                            </div>
+
+                            <button class="deleteButton">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-body ui-body-a userTourReviews">
+                <h2>Northeast Wineries Tour</h2>
+                <div class="ui-body ui-body-a review">
+                    <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+                    <p class="author">&mdash; James O'Neill 11/11/2012</p>
+                    <p class="tapReview">Tap to toggle information</p>
+                    <!-- Stars -->
+                    <div class="reviewHidden">
+                        <div class="ui-grid-d center">
+                            <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <h3 style="margin: 0;">Likes</h3>
+                                <div class="likes">
+                                    <p>The whole trip was very reasonably priced.</p>
+                                </div>
+                            </div>
+                            <div class="ui-block-b">
+                                <h3 style="margin: 0;">Dislikes</h3>
+                                <div class="dislikes">
+                                    <p>None!</p>
+                                </div>
+                            </div>
+
+                            <button class="deleteButton">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-body ui-body-a userTourReviews">
+                <h2>Melbourne Sightseeing</h2>
+                <div class="ui-body ui-body-a review">
+                    <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+                    <p class="author">&mdash; James O'Neill 11/11/2012</p>
+                    <p class="tapReview">Tap to toggle information</p>
+                    <!-- Stars -->
+                    <div class="reviewHidden">
+                        <div class="ui-grid-d center">
+                            <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <h3 style="margin: 0;">Likes</h3>
+                                <div class="likes">
+                                    <p>The whole trip was very reasonably priced.</p>
+                                </div>
+                            </div>
+                            <div class="ui-block-b">
+                                <h3 style="margin: 0;">Dislikes</h3>
+                                <div class="dislikes">
+                                    <p>None!</p>
+                                </div>
+                            </div>
+
+                            <button class="deleteButton">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-body ui-body-a review">
+                    <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
+                    <p class="author">&mdash; James O'Neill 11/11/2012</p>
+                    <p class="tapReview">Tap to toggle information</p>
+                    <!-- Stars -->
+                    <div class="reviewHidden">
+                        <div class="ui-grid-d center">
+                            <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
+                            <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
+                        </div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <h3 style="margin: 0;">Likes</h3>
+                                <div class="likes">
+                                    <p>The whole trip was very reasonably priced.</p>
+                                </div>
+                            </div>
+                            <div class="ui-block-b">
+                                <h3 style="margin: 0;">Dislikes</h3>
+                                <div class="dislikes">
+                                    <p>None!</p>
+                                </div>
+                            </div>
+
+                            <button class="deleteButton">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -444,9 +866,13 @@
 
 <!--<script type="text/javascript" src="cordova.js"></script>-->
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/home.js"></script>
 <script type="text/javascript" src="js/tour.js"></script>
 <script type="text/javascript" src="js/tripBooking.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/review.js"></script>
+<script type="text/javascript" src="js/userReviews.js"></script>
+<script type="text/javascript" src="js/account.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA5aMge2ksCksF5BqYiff8gczkr-qcvrI&callback=initMap" type="text/javascript"></script>
 </body>
 </html>

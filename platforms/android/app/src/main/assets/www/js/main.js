@@ -8,8 +8,13 @@
 */
 
 /////////////////////////////////////////Variable Declaration
-var pageinited = false; 
+var pageinited = false;
+var rootUrl = "http://localhost/index.php";
 
+$.ajaxSetup({
+    headers: { 'Auth': window.localStorage.getItem("AuthKey") },
+    dataType: "json"
+});
 
 /////////////////////////////////////////jquery On Document Ready
 $(function(){
@@ -34,6 +39,10 @@ $(function(){
         loginPage.live("pageshow", ()=>{});
             
      	loginPage.live("pagebeforehide", ()=>{});
+
+        toursPage.live("pagebeforeshow", ()=>{
+            getTours();
+        });
 
      	toursPage.live("pageshow", ()=>{
             let tours = Array.from(document.getElementsByClassName("tour"));

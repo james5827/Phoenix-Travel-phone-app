@@ -2,11 +2,9 @@ let currentDiv = document.getElementById("bookingsDiv");
 (function(){
     let invitesTab = document.getElementById("invitesTab");
     let bookingsTab = document.getElementById("bookingsTab");
-    let historyTab = document.getElementById("historyTab");
 
     let bookingsDiv = document.getElementById("bookingsDiv");
     let invitesDiv = document.getElementById("invitesDiv");
-    let historyDiv = document.getElementById("historyDiv");
 
     bookingsTab.addEventListener("click", ()=>{
         if(currentDiv !== bookingsDiv) {
@@ -22,14 +20,20 @@ let currentDiv = document.getElementById("bookingsDiv");
             currentDiv.classList.add("invisibleTab");
             currentDiv = invitesDiv;
         }
-
     });
 
-    historyTab.addEventListener("click", ()=>{
-        if(currentDiv !== historyDiv) {
-            historyDiv.classList.remove("invisibleTab");
-            currentDiv.classList.add("invisibleTab");
-            currentDiv = historyDiv;
-        }
+    let bookings = Array.from(document.getElementsByClassName("booking"));
+
+    bookings.forEach((booking)=>{
+        booking.addEventListener("click", ()=>{
+            console.log("hello");
+
+            let hidden = booking.getElementsByClassName("hiddenBookingInformation");
+            let toggle = booking.getElementsByClassName("toggleParagraph");
+
+            toggle[0].classList.toggle("hideToggle");
+
+            hidden[0].classList.toggle("showBookingInformation");
+        });
     });
 })();

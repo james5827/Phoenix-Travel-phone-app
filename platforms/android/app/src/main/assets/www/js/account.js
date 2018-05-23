@@ -25,7 +25,6 @@
             spans[x].innerText = inputs[x].value;
         });
     }
-
 })();
 
 

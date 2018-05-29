@@ -25,3 +25,22 @@ function invitedListClick(){
     this.removeEventListener("click", invitedListClick);
     this.addEventListener("click", listClick);
 }
+
+function bookTrip(trip){
+    console.log(trip);
+    $.mobile.changePage("#page5");
+    getItineraries(trip.Tour_No);
+}
+
+function getItineraries(tour_no){
+    $.ajax({
+        type: 'GET',
+        url: rootUrl + /itineraries/ + tour_no
+    })
+    .done(()=>{
+
+    })
+    .fail((e)=>{
+        alert(e.statusText);
+    });
+}

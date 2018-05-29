@@ -23,7 +23,8 @@
 
 .tourBtn{
     border-radius: 0;
-    transition: border-radius 3s ease;
+    transition: border-radius 2s ease;
+    margin-bottom: 0;
 }
 
 .tourBtn-active{
@@ -49,7 +50,7 @@
     margin: auto;
     max-height: 0;
     visibility: hidden;
-    transition: max-height 2s ease, visibility 2s ease;
+    transition: max-height 1s ease, visibility 2s ease;
     overflow: hidden;
     box-sizing: border-box;
     border-radius: 0 0 5px 5px;
@@ -60,7 +61,7 @@
 }
 
 .upComingTrips-active{
-    max-height: 400px;
+    max-height: 200px;
     visibility: initial;
 }
 
@@ -86,4 +87,13 @@
 
 .transform-visible{
     opacity: 1;
+}
+
+.tripPositionSpan{
+    float: right;
+}
+
+.ui-listview-inset{
+    margin: 0 !important;
+    border-radius: 0 !important;
 }

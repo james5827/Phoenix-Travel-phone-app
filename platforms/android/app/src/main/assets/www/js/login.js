@@ -1,5 +1,4 @@
 (function(){
-
     let loginBtn = document.getElementById("loginBtn");
     let email = document.getElementById("loginEmail");
     let password = document.getElementById("loginPassword");
@@ -17,9 +16,11 @@
             })
             .done(function(data){
                 alert("Login Successful");
-                window.localStorage.setItem("AuthKey", data);
                 email.value = "";
                 password.value = "";
+                window.localStorage.setItem("CustomerId", data[0]);
+                window.localStorage.setItem("AuthKey", data[1]);
+                initAjaxSettings(data[1]);
 
                 $.mobile.changePage("#page3");
             })

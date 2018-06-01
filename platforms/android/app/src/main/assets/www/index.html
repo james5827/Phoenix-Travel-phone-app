@@ -72,7 +72,7 @@
             <li data-icon="home"><a href="#page3">Home</a></li>
             <li data-icon="info"><a href="#page4">Tours</a></li>
             <li data-icon="user"><a href="#page6">Account</a></li>
-            <li data-icon="back"><a>Logout</a></li>
+            <li data-icon="back" id="logout"><a>Logout</a></li>
             <li data-icon="delete"><a data-rel="close">Close</a></li>
         </ul>
     </div>
@@ -157,22 +157,6 @@
 
             <div id="invitesContent">
 
-                <div class="ui-body ui-body-a invites">
-                    <h4 class="inviteTitle">Booking Number: <span>TEST</span></h4>
-                    <h4 class="inviteTitle">Tour: <span>Twelve Apostles</span></h4>
-                    <h4 class="inviteTitle">Departure date: <span>2016-05-15</span></h4>
-                    <h4 class="inviteTitle" style="margin-bottom: 0;">Inviter: <span>Fred Smith</span></h4>
-
-                    <div class="ui-grid-a">
-                        <div class="ui-block-a" style="padding-right: 2px">
-                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-check accept">Accept</button>
-                        </div>
-                        <div class="ui-block-b" style="padding-left: 2px">
-                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-delete decline">Decline</button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
 
@@ -241,19 +225,15 @@
             <div data-role="fieldcontain">
                 <h3 style="font-weight: bold;">Itinerary</h3>
                 <table data-role="table" class="ui-body-d ui-shadow table-stripe ui-responsive">
-                    <thead>
-                        <tr>
-                            <th>Day One:</th>
-                            <th style="margin: 0;">Activities:</th>
-                            <th>Meals:</th>
-                        </tr>
+                    <thead id="itineraryHead">
+                    <tr>
+                        <th>Day</th>
+                        <th style="margin: 0;">Activities:</th>
+                        <th>Meals:</th>
+                    </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td>Guided tour around the CBD</td>
-                            <td>Lunch On Lygon Street</td>
-                        </tr>
+                    <tbody id="itineraryBody">
+
                     </tbody>
                 </table>
             </div>
@@ -262,24 +242,15 @@
                 <h3>Additional Passengers</h3>
             </div>
             <div class="ui-body ui-body-a">
-                <form>
-                    <input type="search" id="addCustomersSearch" placeholder="Invite">
-                </form>
-                <ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-input="#addCustomersSearch" id="testman">
-                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">John</a></li>
-                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">James</a></li>
-                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">Janet</a></li>
-                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">Jerry</a></li>
-                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">Jones</a></li>
-                    <li class="ui-screen-hidden tripAddCustomer"><a href="#" class="ui-icon-mail">Jeremy</a></li>
+                <input type="text" id="addCustomersSearch" placeholder="Invite">
+
+                <ul data-role="listview" data-inset="true" id="filterAddPassengers">
                 </ul>
                 <ul class="ActiveAddCustomers" id="Add">
                 </ul>
             </div>
 
-            <form>
-                <button>Book</button>
-            </form>
+            <button id="bookTripBtn">Book</button>
         </div>
     </div>
 </div>
@@ -391,7 +362,7 @@
         <h1></h1>
     </div>
     <div data-role="content" id="Page7content" class="">
-        <h1 class="title">Twelve Apostles Drive</h1>
+        <h1 class="title" id="tourReviewHeader"></h1>
 
         <div class="ui-body ui-body-a">
             <button id="formRevealBtn">Write A Review</button>

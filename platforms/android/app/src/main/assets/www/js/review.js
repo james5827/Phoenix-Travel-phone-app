@@ -37,12 +37,15 @@ function reviewClick(review){
     };
 }
 
-function loadReviewPage(tour_no){
+function loadReviewPage(tour_no, tour_name){
     return function () {
+        let title = document.getElementById("tourReviewHeader");
+        title.innerText = tour_name;
         $.ajax({
             type: 'GET',
             url: rootUrl + '/tour_reviews/' + tour_no
         }).done((data)=>{
+
             let allReviewDiv = document.getElementById("reviews");
             let htmlString = '';
             data.forEach((data)=>{

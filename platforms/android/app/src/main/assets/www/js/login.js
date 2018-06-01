@@ -2,6 +2,7 @@
     let loginBtn = document.getElementById("loginBtn");
     let email = document.getElementById("loginEmail");
     let password = document.getElementById("loginPassword");
+    let logoutBtn = document.getElementById("logout");
 
     loginBtn.addEventListener("click", () => {
         let json = {
@@ -29,4 +30,11 @@
                 password.value = "";
             });
     });
+
+    logoutBtn.addEventListener("click", logout);
 })();
+
+function logout() {
+    window.localStorage.clear();
+    $.mobile.changePage("#page1");
+}

@@ -51,9 +51,23 @@ function getBookings() {
     });
 }
 
+function deleteBooking(booking, booking_no){
+    $.ajax({
+        type: "DELETE",
+        url: rootUrl + '/delete_booking/' + booking_no
+    })
+    .done((data)=>{
+        booking.parentElement.removeChild(booking);
+    })
+    .fail((e)=>{
+        alert(e.statusText);
+    });
+}
+
 class Booking extends Component
 {
     constructor(data){
+        console.log(data);
         super(data);
     }
 
@@ -72,7 +86,7 @@ class Booking extends Component
                     <h2 style="margin-bottom: 0;">Additional Passengers</h2>
                     <div class="additionalPassengers">
                     </div>
-                    <button class="decline">Delete</button>
+                    <button class="decline" onclick="deleteBooking(this.parentElement.parentElement.parentElement, ${this.properties.Trip_Booking_No})">${this.properties.Owner != true ? 'Delete Invite' : 'Delete Booking'}</button>
                 </div>
             </div>`;
 
@@ -93,7 +107,7 @@ function getAdditionalPassengers(el, trip_booking_no) {
 
             if(data[0]) {
                 data.forEach((passenger)=>{
-                    htmlString += new AdditionalPassenger(passenger).render();
+                    htmlString += new InvitedAdditionalPassenger(passenger).render();
                 });
                 el.innerHTML = htmlString;
             }
@@ -123,15 +137,35 @@ function getInvites() {
     });
 }
 
-function acceptInvite(component, Trip_Booking_No){
-
+function acceptInvite(component, Trip_Booking_No, Customer_Id){
+    $.ajax({
+            type: "PUT",
+            url: rootUrl + '/accept_invite/' + Trip_Booking_No + '/' + Customer_Id
+        })
+        .done((data)=>{
+            component.parentElement.removeChild(component);
+        })
+        .fail((e)=>{
+            alert(e.statusText);
+        });
 }
 
-function declineInvite(component, Trip_Booking_No){
+function declineInvite(component, Trip_Booking_No, Customer_Id){
+    console.log(component);
 
+    $.ajax({
+            type: "DELETE",
+            url: rootUrl + '/refuse_invite/' + Trip_Booking_No + '/' + Customer_Id
+        })
+        .done((data)=>{
+            component.parentElement.removeChild(component);
+        })
+        .fail((e)=>{
+            alert(e.statusText);
+        });
 }
 
-class AdditionalPassenger extends Component
+class InvitedAdditionalPassenger extends Component
 {
     constructor(data){
         super(data);
@@ -163,10 +197,10 @@ class Invite extends Component
 
                     <div class="ui-grid-a">
                         <div class="ui-block-a" style="padding-right: 2px">
-                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-check accept" onclick="acceptInvite(this, ${this.properties.Trip_Booking_No})">Accept</button>
+                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-check accept" onclick="acceptInvite(this.parentElement.parentElement.parentElement, ${this.properties.Trip_Booking_No}, window.localStorage.getItem('CustomerId'))">Accept</button>
                         </div>
                         <div class="ui-block-b" style="padding-left: 2px">
-                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-delete decline" onclick="declineInvite(this, ${this.properties.Trip_Booking_No})">Decline</button>
+                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-delete decline" onclick="declineInvite(this.parentElement.parentElement.parentElement, ${this.properties.Trip_Booking_No}, ${window.localStorage.getItem('CustomerId')})">Decline</button>
                         </div>
                     </div>
                 </div>`;

@@ -57,6 +57,7 @@ function tourPageEvents(){
 
     $("#filterableTour").filterable({
         filter: function(event, ui) {
+            console.log(event);
             let test = Array.from(ui.items);
             test.forEach((tour)=>{
                 if((tour.getBoundingClientRect().top !== 0) && window.innerHeight > tour.getBoundingClientRect().bottom) {
@@ -76,8 +77,8 @@ class Tour extends Component
     }
 
     render(){
-        let outerContainer = document.createElement("div");
-        outerContainer.innerHTML = `
+            let outerContainer = document.createElement("div");
+            outerContainer.innerHTML = `
             <div class="ui-body ui-body-a tour ui-corner-all" tabindex="1">
                 <h1>${this.properties.Tour_Name}</h1>
                 <p class="tourDescription">${this.properties.Description}</p>
@@ -88,7 +89,7 @@ class Tour extends Component
                     <div class="upComingTrips">
                         <ul data-role="listview" data-inset="true" class="tourTripList">
                         </ul>
-                        <button class="tourReviewBtn ui-btn-active" onclick="loadReviewPage(${this.properties.Tour_no})()">Reviews</button>
+                        <button class="tourReviewBtn ui-btn-active" onclick="loadReviewPage(${this.properties.Tour_no}, '${this.properties.Tour_Name}')()">Reviews</button>
                     </div>
                 </div>
             </div>`;
@@ -128,7 +129,7 @@ class Trip extends Component
     }
 
     render(){
-        return `<li onclick='bookTrip(${JSON.stringify(this.properties)})'><a>${this.properties.Departure_Date}<span>${this.properties.Max_Passengers} - Positions Left</span></a></li>`;
+        return `<li onclick='getTripBookForm(${JSON.stringify(this.properties)})'><a>${this.properties.Departure_Date}<span>${this.properties.Max_Passengers} - Positions Left</span></a></li>`;
     }
 }
 

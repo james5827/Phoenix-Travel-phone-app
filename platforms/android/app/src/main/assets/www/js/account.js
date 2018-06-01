@@ -7,10 +7,15 @@
                  document.getElementById("spanPostcode")];
 
     for(let x = 0; x<inputs.length; ++x){
-        inputs[x].addEventListener("keyup", ()=>{
+        inputs[x].addEventListener("input", ()=>{
             spans[x].innerText = inputs[x].value;
         });
     }
+
+    let saveBtn = document.getElementById('accountSaveBtn');
+    saveBtn.addEventListener('click', ()=>{
+        saveDetails();
+    });
 })();
 
 function getDetails()
@@ -27,12 +32,38 @@ function getDetails()
     });
 }
 
-function saveDetails(){
+function saveDetails(password = localStorage.getItem('AuthKey')){
+    let json = {
+        customer_id : localStorage.getItem('CustomerId'),
+        first_name : document.getElementById("accountFirst").value,
+        middle_initial: document.getElementById('accountInitial').value,
+        last_name: document.getElementById('accountLast').value,
+        street_no: document.getElementById('accountStreetNo').value,
+        street_name: document.getElementById('accountStreetName').value,
+        suburb : document.getElementById('accountSuburb').value,
+        postcode : document.getElementById('accountPostCode').value,
+        email : document.getElementById('accountEmail').value,
+        password : password,
+        phone : document.getElementById('accountPhone').value
+    };
+
     $.ajax({
-        type: 'POST',
-        url: rootUrl + '/user/';
+        type: 'PUT',
+        url: rootUrl + '/update_account',
+        data: json
+    })
+    .done((data)=>{
+        if(data) {
+            getDetails();
+            alert("Account Updated");
+        }
+    })
+    .fail((e)=>{
+        alert(e.statusText);
     });
 }
+
+//TODO Save Password
 
 //IM SO SORRY
 function fillFields(data){
@@ -53,14 +84,6 @@ function fillFields(data){
     let streetNameSpan = document.getElementById("spanStreetName");
     let suburbSpan = document.getElementById("spanSuburb");
     let postCodeSpan = document.getElementById("spanPostcode");
-
-    firstSpan.appendChild(document.createTextNode(data.First_Name));
-    initialSpan.appendChild(document.createTextNode(data.Middle_Initial));
-    lastSpan.appendChild(document.createTextNode(data.Last_Name));
-    streetNoSpan.appendChild(document.createTextNode(data.Street_No));
-    streetNameSpan.appendChild(document.createTextNode(data.Street_Name));
-    suburbSpan.appendChild(document.createTextNode(data.Suburb));
-    postCodeSpan.appendChild(document.createTextNode(data.Postcode));
 
     customerIdInput.value = data.Customer_Id;
     firstInput.value = data.First_Name;
@@ -85,8 +108,17 @@ function fillFields(data){
             streetNameInput.value = data.Street_Name;
             suburbInput.value = data.Suburb;
             postCodeInput.value = data.Postcode;
+
+            firstSpan.innerText = data.First_Name;
+            initialSpan.innerText = data.Middle_Initial;
+            lastSpan.innerText = data.Last_Name;
+            streetNoSpan.innerText = data.Street_No;
+            streetNameSpan.innerText = data.Street_Name;
+            suburbSpan.innerText = data.Suburb;
+            postCodeSpan.innerText = data.Postcode;
         }
     };
+
     setValuesToData(data)();
     let accountResetBtn =  document.getElementById("accountResetBtn");
     accountResetBtn.onclick = setValuesToData(data);

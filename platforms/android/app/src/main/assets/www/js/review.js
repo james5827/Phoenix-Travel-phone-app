@@ -23,10 +23,14 @@
 
     let reviewFormBtn = document.getElementById("formRevealBtn");
 
-    reviewFormBtn.addEventListener("click", (form)=>{
+    reviewFormBtn.addEventListener("click", ()=>{
         let reviewForm = document.getElementById("reviewForm");
         reviewForm.classList.toggle("reviewShow");
     });
+
+    let reviewSubmitBtn = document.getElementById('submitReview');
+    reviewSubmitBtn.addEventListener("click", addReview);
+
 })();
 
 function reviewClick(review){
@@ -41,6 +45,7 @@ function loadReviewPage(tour_no, tour_name){
     return function () {
         let title = document.getElementById("tourReviewHeader");
         title.innerText = tour_name;
+        getTripsForATour(tour_no);
         $.ajax({
             type: 'GET',
             url: rootUrl + '/tour_reviews/' + tour_no
@@ -89,11 +94,13 @@ class Review extends Component{
         super(data);
     }
 
+    //todo: rework front end
     render(){
         let starClass = 'ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline';
         return `
             <div class="ui-body ui-body-a review" onclick="reviewClick(this)()">
                 <p class="quotation">${this.properties.General_Feedback}</p>
+                <p class="author">Trip Id: ${this.properties.Trip_Id} - Date: ${this.properties.Departure_Date}</p>
                 <p class="author">TODO</p>
                 <p class="tapReview">Tap to toggle information</p>
                 <div class="reviewHidden">
@@ -120,5 +127,82 @@ class Review extends Component{
                 </div>
                 </div>
             </div>`;
+    }
+}
+
+function addReview(){
+    let generalFeedback = document.getElementById('generalFeedBack');
+    let likes = document.getElementById('likes');
+    let dislikes = document.getElementById('dislikes');
+    let stars = document.getElementById('reviewForm').getElementsByClassName('star');
+    let tripSel = document.getElementById('tripSel');
+
+    let trip_id = tripSel.options[tripSel.selectedIndex].value;
+
+    console.log(tripSel.options[tripSel.selectedIndex].value);
+
+    let rating = 0;
+    for(i = 0; i<5; ++i){
+        if($(stars[i]).hasClass("reviewStar"))
+            ++rating;
+    }
+    console.log(rating);
+
+    let json = {
+        trip_id : trip_id,
+        customer_id : localStorage.getItem("CustomerId"),
+        rating : rating,
+        general_feedback : generalFeedback.value,
+        likes : likes.value,
+        dislikes: dislikes.value
+    };
+
+    console.log(json);
+
+    $.ajax({
+        type: 'POST',
+        url : rootUrl + '/insert_review',
+        data : json
+    })
+    .done((data)=>{
+        console.log(data);
+    })
+    .fail((e)=>{
+        alert(e.statusText);
+    });
+}
+
+function getTripsForATour(tour_no)
+{
+    $.ajax({
+        type : 'GET',
+        url : rootUrl + '/tour_trips/' + tour_no
+    })
+    .done((data)=>{
+        let tripSel = document.getElementById('tripSel');
+        let htmlString = '';
+        data.forEach((tour)=>{
+            htmlString += new ReviewTripOption(tour).render();
+        });
+
+        tripSel.innerHTML = htmlString;
+        $(tripSel).selectmenu( "refresh");
+    })
+    .fail((e)=>{
+        alert(e.statusText);
+    });
+}
+
+class ReviewTripOption extends Component
+{
+    constructor(data) {
+        console.log(data);
+        super(data);
+    }
+
+    render(){
+        return `
+            <option id="${this.properties.Trip_Id}" value="${this.properties.Trip_Id}">ID: ${this.properties.Trip_Id} - Date: ${this.properties.Departure_Date}</option>
+        `;
     }
 }

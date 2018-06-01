@@ -269,7 +269,7 @@
             <h1 class="title">Account Details</h1>
             <div data-role="fieldcontain">
                 <label for="accountId">Customer Id:</label>
-                <input type="text" id="accountId" value="">
+                <input type="text" id="accountId" value="" readonly>
             </div>
             <div data-role="fieldcontain">
                 <label for="accountName">Name:</label>
@@ -337,12 +337,12 @@
             </div>
 
             <div class="ui-grid-a" data-role="fieldcontain" style="padding-bottom: 0">
-                <h3 style="margin: 0">Past Records</h3>
+                <h3 style="margin: 0">View And Change Records</h3>
                 <div class="ui-block-a" style="padding-right: 2px">
                     <a class="ui-btn ui-btn-a ui-corner-all ui-shadow" href="#page8">Reviews</a>
                 </div>
                 <div class="ui-block-b" style="padding-left: 2px">
-                    <a class="ui-btn ui-btn-a ui-corner-all ui-shadow">Bookings</a>
+                    <button>Password</button>
                 </div>
             </div>
 
@@ -366,7 +366,13 @@
 
         <div class="ui-body ui-body-a">
             <button id="formRevealBtn">Write A Review</button>
-            <form id="reviewForm">
+            <form id="reviewForm" action="" method="" data-ajax="false" onsubmit="return false;">
+                <div data-role="fieldcontain">
+                    <label for="tripSel">Trip:</label>
+                    <select name="tripSel" id="tripSel">
+                    </select>
+                </div>
+
                 <div data-role="fieldcontain">
                     <textarea id="generalFeedBack" placeholder="General Feedback:"></textarea>
                 </div>
@@ -386,45 +392,12 @@
                         <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline star"></a></div>
                     </div>
                 </div>
-                <button>Clear</button>
-                <button type="submit">Submit</button>
+                <button type="submit" id="submitReview">Submit</button>
             </form>
         </div>
         <br>
 
-        <!--Dummy Reviews-->
-
         <div id="reviews">
-
-            <div class="ui-body ui-body-a review">
-                <p class="quotation">Excellent trip, I will be booking with you guys again next year!</p>
-                <p class="author">&mdash; James O'Neill 11/11/2012</p>
-                <p class="tapReview">Tap to toggle information</p>
-                <!-- Stars -->
-                <div class="reviewHidden">
-                    <div class="ui-grid-d center">
-                        <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
-                        <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
-                        <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
-                        <div class="ui-block-d"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline reviewStar"></a></div>
-                        <div class="ui-block-e"><a class="ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline"></a></div>
-                    </div>
-                    <div class="ui-grid-a">
-                        <div class="ui-block-a">
-                            <h3 style="margin: 0;">Likes</h3>
-                            <div class="likes">
-                                <p>The whole trip was very reasonably priced.</p>
-                            </div>
-                        </div>
-                        <div class="ui-block-b">
-                            <h3 style="margin: 0;">Dislikes</h3>
-                            <div class="dislikes">
-                                <p>None!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>

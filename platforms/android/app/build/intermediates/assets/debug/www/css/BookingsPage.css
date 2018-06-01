@@ -1,12 +1,71 @@
-#tblBookings{
-    width: 100%;
-    margin-top: 2%;
-}
 .ui-responsive {
-
     display: table !important;
 }
 
-#tblBookings tbody tr:hover{
-    background-color: #e2e2e2;
+#homeFooter{
+    border-top: 1px lightgray solid;
+    border-bottom: 1px lightgray solid;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+#Page3content{
+    margin-bottom: 2em;
+}
+
+.invisibleTab{
+    display: none;
+}
+
+.inviteTitle{
+}
+
+.decline{
+    background: red !important;
+    color: white !important;
+    text-shadow: none !important;
+}
+
+.accept{
+    background: #3dba3b !important;
+    color:white !important;
+    text-shadow: none !important;
+}
+
+.invites{
+    margin-bottom: 1em;
+}
+
+.booking{
+    box-shadow: 2px 2px 8px #989898;
+    border: 1px solid #9d9d9d;
+    overflow: scroll;
+    margin-bottom: 1em;
+}
+
+.bookingTransformHeight{
+    transition: max-height 1s ease;
+}
+
+.hiddenBookingInformation{
+    max-height:0;
+    overflow: hidden;
+}
+
+.showBookingInformation{
+    max-height: 250px !important;
+    display: block;
+    overflow: visible;
+}
+
+.toggleParagraph{
+    height: 20px;
+    transition: all 1s ease;
+}
+
+.hideToggle{
+    overflow: hidden;
+    height: 0;
+    margin: 0;
 }

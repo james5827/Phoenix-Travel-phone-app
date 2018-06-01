@@ -1,33 +1,45 @@
-function initMap(){
-    let apostles = {lat: -38.6621, lng: 143.1051};
-    let wineries = {lat: -37.6877, lng: 145.4574};
-    let melbourne = {lat: -37.8136, lng: 144.9631};
+function getTours(){
+    $.ajax({
+            type: 'GET',
+            url: rootUrl + '/tours'
+        })
+        .done(function(data){
+            let tourContainer = document.getElementById("filterableTour");
+            tourContainer.innerHTML = '';
 
-    let apostlesmap = new google.maps.Map(document.getElementById("ApostlesMap"), {
-        zoom: 15,
-        center: apostles,
-        disableDefaultUI: true
-    });
+            data.forEach((tour)=>{
+                tourContainer.appendChild(new Tour(tour).render());
+            });
 
-    let wineriesmap = new google.maps.Map(document.getElementById("WineriesMap"), {
-        zoom: 17,
-        center: wineries,
-        disableDefaultUI: true
-    });
-
-    let melbournemap = new google.maps.Map(document.getElementById("MelbourneMap"), {
-        zoom: 15,
-        center: melbourne,
-        disableDefaultUI: true
-    });
+            tourPageEvents()
+        })
+        .fail(function(e){
+            alert(e.statusText);
+        });
 }
 
-//TODO: add to onDeviceReady
-(function initTourEvents(){
+function getTrips(list, tour_no){
+    $.ajax({
+        type: 'GET',
+        url: rootUrl + '/tour_trips/' + tour_no
+    })
+        .done((data)=>{
+            let htmlString = '';
+            data.forEach((trip)=>{
+                htmlString += new Trip(trip).render();
+            });
+            list.innerHTML = htmlString;
+            $(list).listview("refresh");
+        })
+        .fail((e)=>{
+            alert(e.statusText);
+        });
+}
+
+function tourPageEvents(){
     let tourPage = document.getElementById("page4");
     let tours = Array.from(document.getElementsByClassName("tour"));
 
-    //Tour Scroll Event
     tourPage.addEventListener("scroll", ()=>{
         tours.forEach((tour)=>{
             if(window.innerHeight > tour.getBoundingClientRect().bottom
@@ -38,62 +50,97 @@ function initMap(){
         });
     });
 
-    //Tour Filter Event
+    tours.forEach((tour)=>{
+        if(window.innerHeight > tour.getBoundingClientRect().top + tour.offsetHeight)
+            tour.classList.add("transform-visible");
+    });
+
     $("#filterableTour").filterable({
         filter: function(event, ui) {
+            console.log(event);
             let test = Array.from(ui.items);
             test.forEach((tour)=>{
                 if((tour.getBoundingClientRect().top !== 0) && window.innerHeight > tour.getBoundingClientRect().bottom) {
-                    tour.classList.add("transform-visible");
+                    tour.firstElementChild.classList.add("transform-visible");
                 }else {
-                    tour.classList.remove("transform-visible");
+                    tour.firstElementChild.classList.remove("transform-visible");
                 }
             });
         }
     });
+}
 
-    //Tour Divs
-    let apostlesTour = document.getElementById("ApostlesTour");
-    let wineriesTour = document.getElementById("WineriesTour");
-    let melbourneTour = document.getElementById("MelbourneTour");
+class Tour extends Component
+{
+    constructor(data){
+        super(data);
+    }
 
-    //Map Divs
-    let apostlesMap = document.getElementById("ApostlesMap");
-    let wineriesMap = document.getElementById("WineriesMap");
-    let melbourneMap = document.getElementById("MelbourneMap");
+    render(){
+            let outerContainer = document.createElement("div");
+            outerContainer.innerHTML = `
+            <div class="ui-body ui-body-a tour ui-corner-all" tabindex="1">
+                <h1>${this.properties.Tour_Name}</h1>
+                <p class="tourDescription">${this.properties.Description}</p>
+                <div class="map transform"></div>
+                <p class="MapClick"><i>Click to see map.</i></p>
+                <div>
+                    <h5 class="ui-btn ui-btn-active tourBtn" style="margin-bottom: 0;">Upcoming Trips</h5>
+                    <div class="upComingTrips">
+                        <ul data-role="listview" data-inset="true" class="tourTripList">
+                        </ul>
+                        <button class="tourReviewBtn ui-btn-active" onclick="loadReviewPage(${this.properties.Tour_no}, '${this.properties.Tour_Name}')()">Reviews</button>
+                    </div>
+                </div>
+            </div>`;
 
-    //View Trip Buttons
-    let apostlesViewBtn = document.getElementById("ApostlesTripBtn");
-    let wineriesViewBtn = document.getElementById("WineriesTripBtn");
-    let melbourneViewBtn = document.getElementById("MelbourneTripBtn");
+        //TODO add inline event listeners
+        let tourDiv = outerContainer.firstElementChild;
+        let mapDiv = tourDiv.lastElementChild.previousElementSibling.previousElementSibling;
+        let tripDiv = tourDiv.lastElementChild;
+        let tripBtn = tripDiv.firstElementChild;
+        let tripList = tripDiv.lastElementChild.firstElementChild;
 
-    let upcomingTripsBtns = Array.from(document.getElementsByClassName("tourBtn"));
+        initMap(mapDiv, this.properties.Route_Map);
 
-    upcomingTripsBtns.forEach((btn) => {
-        btn.addEventListener("click", ()=>{
-            let upcomingTrips = btn.nextElementSibling;
+        tourDiv.addEventListener("click", mapEvent(mapDiv));
+        tourDiv.addEventListener("mouseleave", mapBlurEvent(mapDiv));
+
+        tripDiv.addEventListener("click", (e)=>{e.stopPropagation()});
+        mapDiv.addEventListener("click", (e)=>{e.stopPropagation()});
+
+        tripBtn.addEventListener("click", ()=>{
+            let upcomingTrips = tripBtn.nextElementSibling;
             upcomingTrips.classList.toggle("upComingTrips-active");
-            btn.classList.toggle("tourBtn-active");
+            tripBtn.classList.toggle("tourBtn-active");
         });
+
+        $(tourDiv).enhanceWithin();
+
+        getTrips(tripList, this.properties.Tour_no);
+        return outerContainer;
+    }
+}
+
+class Trip extends Component
+{
+    constructor(data){
+        super(data);
+    }
+
+    render(){
+        return `<li onclick='getTripBookForm(${JSON.stringify(this.properties)})'><a>${this.properties.Departure_Date}<span>${this.properties.Max_Passengers} - Positions Left</span></a></li>`;
+    }
+}
+
+function initMap(map, routeMap){
+    let apostles = {lat: -38.6621, lng: 143.1051};
+    let googleMap = new google.maps.Map(map, {
+        zoom: 15,
+        center: apostles,
+        disableDefaultUI: true
     });
-
-    apostlesTour.addEventListener("click", mapEvent(apostlesMap));
-    apostlesTour.addEventListener("mouseleave", mapBlurEvent(apostlesMap));
-
-    wineriesTour.addEventListener("click", mapEvent(wineriesMap));
-    wineriesTour.addEventListener("mouseleave", mapBlurEvent(wineriesMap));
-
-    melbourneTour.addEventListener("click", mapEvent(melbourneMap));
-    melbourneTour.addEventListener("mouseleave", mapBlurEvent(melbourneMap));
-
-    apostlesMap.addEventListener("click", (e)=>{e.stopPropagation()});
-    wineriesMap.addEventListener("click", (e)=>{e.stopPropagation()});
-    melbourneMap.addEventListener("click", (e)=>{e.stopPropagation()});
-
-    apostlesViewBtn.addEventListener("click", (e)=>viewBtnEvent(apostlesViewBtn, e));
-    wineriesViewBtn.addEventListener("click", (e)=>viewBtnEvent(wineriesViewBtn, e));
-    melbourneViewBtn.addEventListener("click", (e)=>viewBtnEvent(melbourneViewBtn, e));
-})();
+}
 
 function mapEvent(node){
     return function(){
@@ -113,3 +160,4 @@ function mapBlurEvent(node){
 function viewBtnEvent(node, e){
     e.stopPropagation();
 }
+

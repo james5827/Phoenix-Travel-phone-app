@@ -1,0 +1,9 @@
+.userTourReviews{
+    margin-top: 1em;
+}
+
+.deleteButton{
+    background-color: #e50205 !important;
+    color: #FFF !important;
+    text-shadow: none !important;
+}

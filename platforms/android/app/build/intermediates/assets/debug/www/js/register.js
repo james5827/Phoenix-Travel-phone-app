@@ -9,8 +9,6 @@
     let phone = document.getElementById("phoneNumber");
 
     let registerBtn = document.getElementById("registerBtn");
-    let registerClearBtn = document.getElementById("registerClearBtn");
-    registerClearBtn.addEventListener('click', registerClear)
 
     registerBtn.addEventListener("click", function(){
         let splitName = separateName(name.value);
@@ -64,20 +62,4 @@ function separateAddress(address){
 
 function validateRegistration(){
 
-}
-
-function registerClear(){
-    let name = document.getElementById("name");
-    let address = document.getElementById("address");
-    let email = document.getElementById("registerEmail");
-    let password = document.getElementById("registerPassword");
-    let confirmPassword = document.getElementById("registerConfirmPassword");
-    let phone = document.getElementById("phoneNumber");
-
-    name.value = '';
-    address.value = '';
-    email.value = '';
-    password.value = '';
-    confirmPassword.value = '';
-    phone.value = '';
 }

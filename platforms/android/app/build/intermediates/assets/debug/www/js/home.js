@@ -1,0 +1,208 @@
+let currentDiv = document.getElementById("bookingsDiv");
+(function(){
+    let invitesTab = document.getElementById("invitesTab");
+    let bookingsTab = document.getElementById("bookingsTab");
+
+    let bookingsDiv = document.getElementById("bookingsDiv");
+    let invitesDiv = document.getElementById("invitesDiv");
+
+    bookingsTab.addEventListener("click", ()=>{
+        if(currentDiv !== bookingsDiv) {
+            bookingsDiv.classList.remove("invisibleTab");
+            currentDiv.classList.add("invisibleTab");
+            currentDiv = bookingsDiv;
+        }
+    });
+
+    invitesTab.addEventListener("click", ()=>{
+        if(currentDiv !== invitesDiv) {
+            invitesDiv.classList.remove("invisibleTab");
+            currentDiv.classList.add("invisibleTab");
+            currentDiv = invitesDiv;
+        }
+    });
+})();
+
+function bookingClick(booking){
+    let hidden = booking.getElementsByClassName("hiddenBookingInformation");
+    let toggle = booking.getElementsByClassName("toggleParagraph");
+
+    toggle[0].classList.toggle("hideToggle");
+    hidden[0].classList.toggle("showBookingInformation");
+}
+
+function getBookings() {
+    $.ajax({
+        type: 'GET',
+        url: rootUrl + '/customer_bookings/' + localStorage.getItem("CustomerId")
+    })
+    .done((data)=>{
+        let allBookingsDiv = document.getElementById("bookingsContent");
+        allBookingsDiv.innerHTML = "";
+
+        data.forEach((booking)=>{
+            allBookingsDiv.appendChild(new Booking(booking).render());
+        });
+
+        $(document).enhanceWithin();
+    })
+    .fail((e)=>{
+        alert(e.statusText);
+    });
+}
+
+function deleteBooking(booking, booking_no){
+    $.ajax({
+        type: "DELETE",
+        url: rootUrl + '/delete_booking/' + booking_no
+    })
+    .done((data)=>{
+        booking.parentElement.removeChild(booking);
+    })
+    .fail((e)=>{
+        alert(e.statusText);
+    });
+}
+
+class Booking extends Component
+{
+    constructor(data){
+        console.log(data);
+        super(data);
+    }
+
+    render(){
+        let outerContainer = document.createElement("div");
+        outerContainer.innerHTML = `
+            <div class="ui-body ui-body-a booking ui-corner-all" onclick="bookingClick(this)">
+                <h2 class="inviteTitle" style="margin-top: 0"><span>${this.properties.Tour_Name}</span></h2>
+                <h4 class="inviteTitle" style="margin-bottom: 0">Departure date: <span>${this.properties.Departure_Date}</span></h4>
+                <p class="toggleParagraph">Tap to toggle information</p>
+
+                <div class="hiddenBookingInformation bookingTransformHeight">
+                    <h4 class="inviteTitle">Booking Date: <span>${this.properties.Booking_Date}</span></h4>
+                    <h4 class="inviteTitle">Deposit Amount: <span>${this.properties.Deposit_Amount}</span></h4>
+                    <h4 class="inviteTitle">Duration: <span>35 Days</span></h4>
+                    <h2 style="margin-bottom: 0;">Additional Passengers</h2>
+                    <div class="additionalPassengers">
+                    </div>
+                    <button class="decline" onclick="deleteBooking(this.parentElement.parentElement.parentElement, ${this.properties.Trip_Booking_No})">${this.properties.Owner != true ? 'Delete Invite' : 'Delete Booking'}</button>
+                </div>
+            </div>`;
+
+        let element = outerContainer.lastElementChild.lastElementChild.lastElementChild.previousElementSibling;
+        getAdditionalPassengers(element, this.properties.Trip_Booking_No);
+
+        return outerContainer;
+    }
+}
+
+function getAdditionalPassengers(el, trip_booking_no) {
+    $.ajax({
+        type: 'GET',
+        url: rootUrl + '/additional_customers_bookings/' + trip_booking_no
+    })
+        .done((data)=>{
+            let htmlString = '';
+
+            if(data[0]) {
+                data.forEach((passenger)=>{
+                    htmlString += new InvitedAdditionalPassenger(passenger).render();
+                });
+                el.innerHTML = htmlString;
+            }
+        })
+        .fail((e)=>{
+            alert(e.statusText);
+        });
+}
+
+function getInvites() {
+    $.ajax({
+        type: 'GET',
+        url: rootUrl + '/customer_invites/' + localStorage.getItem('CustomerId')
+    })
+    .done((data)=>{
+        let allInvitesDiv = document.getElementById("invitesContent");
+        let htmlString = '';
+
+        data.forEach((invite) => {
+            htmlString += new Invite(invite).render();
+        });
+
+        allInvitesDiv.innerHTML = htmlString;
+    })
+    .fail((e)=>{
+        alert(e.statusText);
+    });
+}
+
+function acceptInvite(component, Trip_Booking_No, Customer_Id){
+    $.ajax({
+            type: "PUT",
+            url: rootUrl + '/accept_invite/' + Trip_Booking_No + '/' + Customer_Id
+        })
+        .done((data)=>{
+            component.parentElement.removeChild(component);
+        })
+        .fail((e)=>{
+            alert(e.statusText);
+        });
+}
+
+function declineInvite(component, Trip_Booking_No, Customer_Id){
+    console.log(component);
+
+    $.ajax({
+            type: "DELETE",
+            url: rootUrl + '/refuse_invite/' + Trip_Booking_No + '/' + Customer_Id
+        })
+        .done((data)=>{
+            component.parentElement.removeChild(component);
+        })
+        .fail((e)=>{
+            alert(e.statusText);
+        });
+}
+
+class InvitedAdditionalPassenger extends Component
+{
+    constructor(data){
+        super(data);
+    }
+
+    render(){
+        let classList = "ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-right";
+        return `
+            <button class="${classList} ${this.properties.Accepted_Invite === "1" ? 'ui-icon-check' : 'ui-icon-mail'}">
+                ${this.properties.First_Name} ${this.properties.Middle_Initial} ${this.properties.Last_Name}
+            </button>
+        `;
+    }
+}
+
+class Invite extends Component
+{
+    constructor(data){
+        super(data);
+    }
+
+    render(){
+        return `
+            <div class="ui-body ui-body-a invites">
+                    <h4 class="inviteTitle">Booking Number: <span>${this.properties.Trip_Booking_No}</span></h4>
+                    <h4 class="inviteTitle">Tour: <span>${this.properties.Tour_Name}</span></h4>
+                    <h4 class="inviteTitle">Departure date: <span>${this.properties.Departure_Date}</span></h4>
+                    <h4 class="inviteTitle" style="margin-bottom: 0;">Inviter: <span>${this.properties.First_Name} ${this.properties.Middle_Initial} ${this.properties.Last_Name}</span></h4>
+
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a" style="padding-right: 2px">
+                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-check accept" onclick="acceptInvite(this.parentElement.parentElement.parentElement, ${this.properties.Trip_Booking_No}, window.localStorage.getItem('CustomerId'))">Accept</button>
+                        </div>
+                        <div class="ui-block-b" style="padding-left: 2px">
+                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-delete decline" onclick="declineInvite(this.parentElement.parentElement.parentElement, ${this.properties.Trip_Booking_No}, ${window.localStorage.getItem('CustomerId')})">Decline</button>
+                        </div>
+                    </div>
+                </div>`;
+    }
+}

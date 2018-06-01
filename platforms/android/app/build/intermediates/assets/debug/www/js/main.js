@@ -6,66 +6,78 @@
  Last Modified: 04/2/2017 22:00
  Last Modified by: Bill Kascamanidis
 */
-
 /////////////////////////////////////////Variable Declaration
-var pageinited = false; 
-
-
+var pageinited = false;
+var rootUrl = "http://10.0.0.21/";
 /////////////////////////////////////////jquery On Document Ready
 $(function(){
         // Billk added code
-        if(pageinited){return;} else{pageinited= true;}
+    if(pageinited){return;} else{pageinited= true;}
 
-        $(document).ready(function(){
-            $('#myPanel').enhanceWithin().panel();
-        });
+    let key = window.localStorage.getItem("AuthKey");
+    initAjaxSettings(key);
 
-        let homePage= $("#homepage");
-        let loginPage = $("#page1");
-        let toursPage = $("#page4");
-        let reviewPage = $("#page7");
+    $(document).ready(function(){
+        $('#myPanel').enhanceWithin().panel();
+    });
 
-        homePage.live("pagebeforeshow", ()=>{});
+    let toursPage = $("#page4");
+    let accountPage = $("#page6");
+    let homepage = $("#page3");
 
-		homePage.live("pagebeforehide",()=>{});
+    homepage.live("pagebeforeshow", ()=>{
+        getBookings();
+        getInvites();
+    });
 
-        loginPage.live("pagebeforeshow", ()=>{});
-                 
-        loginPage.live("pageshow", ()=>{});
-            
-     	loginPage.live("pagebeforehide", ()=>{});
+    toursPage.live("pagebeforeshow", ()=>{
+        getTours();
+    });
 
-     	toursPage.live("pageshow", ()=>{
-            let tours = Array.from(document.getElementsByClassName("tour"));
-            tours.forEach((tour)=>{
-                if(window.innerHeight > tour.getBoundingClientRect().top + tour.offsetHeight)
-                    tour.classList.add("transform-visible");
-            });
-        });
+    accountPage.live("pagebeforeshow", () => {
+        getDetails();
+    });
 
-     	reviewPage.live("pageshow", ()=>{
-            let reviews = Array.from(document.getElementsByClassName("review"));
-            reviews.forEach((review)=>{
-                if(window.innerHeight > review.getBoundingClientRect().bottom
-                    && 0 < review.getBoundingClientRect().top || review.contains(document.activeElement) || review === document.activeElement)
-                    review.classList.add("reviewTransform");
-                else
-                    review.classList.remove("reviewTransform");
-            });
-        });
+    let tourHeader = document.getElementById("page4");
+    tourHeader.addEventListener("scroll", pageScrollEvent(tourHeader));
+    let reviewHeader = document.getElementById("page7");
+    reviewHeader.addEventListener("scroll", pageScrollEvent(reviewHeader));
 
-        let tourHeader = document.getElementById("page4");
-        tourHeader.addEventListener("scroll", pageScrollEvent(tourHeader));
-        let reviewHeader = document.getElementById("page7");
-        reviewHeader.addEventListener("scroll", pageScrollEvent(reviewHeader));
-
-        function pageScrollEvent(page){
-            let previous = page.scrollTop;
-            let header = page.firstElementChild.classList;
-            return function(){
-                page.scrollTop > previous ? header.add("header-up") : header.remove("header-up");
-                previous = page.scrollTop;
-            }
+    function pageScrollEvent(page){
+        let previous = page.scrollTop;
+        let header = page.firstElementChild.classList;
+        return function(){
+            page.scrollTop > previous ? header.add("header-up") : header.remove("header-up");
+            previous = page.scrollTop;
         }
+    }
 });  // end document on pageinit
 ///////////////////////////////////////// END jquery On Document Ready
+
+function initAjaxSettings(key){
+    $.ajaxSetup({
+        headers: {'Auth': key},
+        dataType: "json"
+    });
+}
+
+class Component
+{
+    constructor(data){
+        for(let prop in data)
+        {
+            data[prop] = data[prop] != null ? escapeHtml(data[prop]) :  '';
+        }
+
+        this.properties = data;
+    }
+}
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}

@@ -123,10 +123,3 @@ function fillFields(data){
     let accountResetBtn =  document.getElementById("accountResetBtn");
     accountResetBtn.onclick = setValuesToData(data);
 }
-
-
-
-
-
-
-

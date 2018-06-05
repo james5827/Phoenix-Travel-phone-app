@@ -45,33 +45,32 @@ function loadReviewPage(tour_no, tour_name){
     return function () {
         let title = document.getElementById("tourReviewHeader");
         title.innerText = tour_name;
+
         getTripsForATour(tour_no);
-        $.ajax({
-            type: 'GET',
-            url: rootUrl + '/tour_reviews/' + tour_no
-        }).done((data)=>{
+        loadTourReviews(tour_no);
 
-            let allReviewDiv = document.getElementById("reviews");
-            let htmlString = '';
-            data.forEach((data)=>{
-                let review = new Review(data);
-                htmlString += review.render();
-            });
-            allReviewDiv.innerHTML = htmlString;
+        $.mobile.changePage("#page7");
+    }
+}
 
-            /////////////////////////////////////////////////////////////look at this later
-            let reviewPage = document.getElementById("page7");
-            let reviews = Array.from(reviewPage.getElementsByClassName("review"));
-            reviewPage.addEventListener("scroll", ()=>{
-                reviews.forEach((review)=>{
-                    if(window.innerHeight > review.getBoundingClientRect().bottom
-                        && 0 < review.getBoundingClientRect().top || review.contains(document.activeElement) || review === document.activeElement)
-                        review.classList.add("reviewTransform");
-                    else
-                        review.classList.remove("reviewTransform");
-                });
-            });
+function loadTourReviews(tour_no){
+    $.ajax({
+        type: 'GET',
+        url: rootUrl + '/tour_reviews/' + tour_no
+    }).done((data)=>{
 
+        let allReviewDiv = document.getElementById("reviews");
+        let htmlString = '';
+        data.forEach((data)=>{
+            let review = new Review(data);
+            htmlString += review.render();
+        });
+        allReviewDiv.innerHTML = htmlString;
+
+        /////////////////////////////////////////////////////////////look at this later
+        let reviewPage = document.getElementById("page7");
+        let reviews = Array.from(reviewPage.getElementsByClassName("review"));
+        reviewPage.addEventListener("scroll", ()=>{
             reviews.forEach((review)=>{
                 if(window.innerHeight > review.getBoundingClientRect().bottom
                     && 0 < review.getBoundingClientRect().top || review.contains(document.activeElement) || review === document.activeElement)
@@ -79,19 +78,28 @@ function loadReviewPage(tour_no, tour_name){
                 else
                     review.classList.remove("reviewTransform");
             });
-            //////////////////////////////////////////////////////////////////
-
-        }).fail((e)=>{
-            alert(e.statusText);
         });
 
-        $.mobile.changePage("#page7");
-    }
+        reviews.forEach((review)=>{
+            if(window.innerHeight > review.getBoundingClientRect().bottom
+                && 0 < review.getBoundingClientRect().top || review.contains(document.activeElement) || review === document.activeElement)
+                review.classList.add("reviewTransform");
+            else
+                review.classList.remove("reviewTransform");
+        });
+        //////////////////////////////////////////////////////////////////
+
+        localStorage.setItem("ReviewTourNo", tour_no);
+
+    }).fail((e)=>{
+        alert(e.statusText);
+    });
 }
 
 class Review extends Component{
-    constructor(data){
+    constructor(data, userReview = false){
         super(data);
+        this.properties.userReview = userReview;
     }
 
     //todo: rework front end
@@ -105,11 +113,11 @@ class Review extends Component{
                 <p class="tapReview">Tap to toggle information</p>
                 <div class="reviewHidden">
                     <div class="ui-grid-d center">
-                        <div class="ui-block-a"><a class="${starClass} ${this.properties.Rating >= "5" ? 'reviewStar' : ''}"></a></div>
-                        <div class="ui-block-b"><a class="${starClass} ${this.properties.Rating >= "4" ? 'reviewStar' : ''}"></a></div>
+                        <div class="ui-block-a"><a class="${starClass} ${this.properties.Rating >= "1" ? 'reviewStar' : ''}"></a></div>
+                        <div class="ui-block-b"><a class="${starClass} ${this.properties.Rating >= "2" ? 'reviewStar' : ''}"></a></div>
                         <div class="ui-block-c"><a class="${starClass} ${this.properties.Rating >= "3" ? 'reviewStar' : ''}"></a></div>
-                        <div class="ui-block-d"><a class="${starClass} ${this.properties.Rating >= "2" ? 'reviewStar' : ''}"></a></div>
-                        <div class="ui-block-e"><a class="${starClass} ${this.properties.Rating >= "1" ? 'reviewStar' : ''}"></a></div>
+                        <div class="ui-block-d"><a class="${starClass} ${this.properties.Rating >= "4" ? 'reviewStar' : ''}"></a></div>
+                        <div class="ui-block-e"><a class="${starClass} ${this.properties.Rating >= "5" ? 'reviewStar' : ''}"></a></div>
                     </div>
                     <div class="ui-grid-a">
                     <div class="ui-block-a">
@@ -123,7 +131,9 @@ class Review extends Component{
                         <div class="dislikes">
                             <p>${this.properties.Dislikes}</p>
                         </div>
-                    </div>   
+                    </div>
+                   
+                    ${this.properties.userReview ? `<button class="deleteButton" onclick="deleteUserReview(event, ${this.properties.Trip_Id}, ${this.properties.Customer_Id}, this)">Delete</button>` : ``}   
                 </div>
                 </div>
             </div>`;
@@ -166,6 +176,9 @@ function addReview(){
     })
     .done((data)=>{
         console.log(data);
+
+        loadTourReviews(localStorage.getItem("ReviewTourNo"));
+        clearReviewForm();
     })
     .fail((e)=>{
         alert(e.statusText);
@@ -174,11 +187,13 @@ function addReview(){
 
 function getTripsForATour(tour_no)
 {
+    console.log("here");
     $.ajax({
         type : 'GET',
         url : rootUrl + '/tour_trips/' + tour_no
     })
     .done((data)=>{
+        console.log(data);
         let tripSel = document.getElementById('tripSel');
         let htmlString = '';
         data.forEach((tour)=>{
@@ -205,4 +220,19 @@ class ReviewTripOption extends Component
             <option id="${this.properties.Trip_Id}" value="${this.properties.Trip_Id}">ID: ${this.properties.Trip_Id} - Date: ${this.properties.Departure_Date}</option>
         `;
     }
+}
+
+function clearReviewForm(){
+    let generalFeedback = document.getElementById("generalFeedBack");
+    let likes = document.getElementById("likes");
+    let dislikes = document.getElementById("dislikes");
+    let stars = Array.from(document.getElementsByClassName("star"));
+
+    generalFeedback.value = "";
+    likes.value = "";
+    dislikes.value = "";
+
+    stars.forEach((star) => {
+        star.classList.remove("reviewStar");
+    });
 }

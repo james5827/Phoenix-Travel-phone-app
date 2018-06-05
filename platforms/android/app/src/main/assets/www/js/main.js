@@ -24,6 +24,7 @@ $(function(){
     let toursPage = $("#page4");
     let accountPage = $("#page6");
     let homepage = $("#page3");
+    let userReviewPage = $("#page8");
 
     homepage.live("pagebeforeshow", ()=>{
         getBookings();
@@ -36,6 +37,10 @@ $(function(){
 
     accountPage.live("pagebeforeshow", () => {
         getDetails();
+    });
+
+    userReviewPage.live("pagebeforeshow", ()=>{
+        loadUserReviews();
     });
 
     let tourHeader = document.getElementById("page4");

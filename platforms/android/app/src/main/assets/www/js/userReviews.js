@@ -75,8 +75,6 @@ function deleteUserReview(e, trip_id, customer_id, component) {
         let containerDiv = component.parentElement.parentElement.parentElement.parentElement;
         containerDiv.removeChild(component.parentElement.parentElement.parentElement);
 
-        console.log(component.parentElement.parentElement.parentElement.parentElement);
-
         let divChild = document.getElementsByTagName("div");
 
         if(divChild.length === 1) {

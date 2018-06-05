@@ -57,7 +57,6 @@ function tourPageEvents(){
 
     $("#filterableTour").filterable({
         filter: function(event, ui) {
-            console.log(event);
             let test = Array.from(ui.items);
             test.forEach((tour)=>{
                 if((tour.getBoundingClientRect().top !== 0) && window.innerHeight > tour.getBoundingClientRect().bottom) {

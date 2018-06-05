@@ -342,15 +342,28 @@
                     <a class="ui-btn ui-btn-a ui-corner-all ui-shadow" href="#page8">Reviews</a>
                 </div>
                 <div class="ui-block-b" style="padding-left: 2px">
-                    <button>Password</button>
+                    <a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop">Password</a>
                 </div>
             </div>
 
             <button id="accountResetBtn">Reset</button>
             <button id="accountSaveBtn">Save</button>
-        </div>
+
+            <div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all"><!--
+                        --><div style="padding:10px 20px;"><!--
+                            --><h3>Reset Your Password</h3><!--
+                            --><label for="new_password" class="ui-hidden-accessible">New Password:</label><!--
+                            --><input type="password" name="user" id="new_password" value="" placeholder="New Password" data-theme="a"><!--
+                            --><label for="confirm_new_password" class="ui-hidden-accessible">Confirm New Password:</label><!--
+                            --><input type="password" name="pass" id="confirm_new_password" value="" placeholder="Confirm Password" data-theme="a"><!--
+                            --><button id="ResetPasswordBtn" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Reset</button><!--
+                        --></div><!--
+                --></div><!--
+        --></div>
     </div>
 </div>
+
+
 
 <!--
     Trip Reviews

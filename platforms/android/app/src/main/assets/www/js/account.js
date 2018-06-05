@@ -16,6 +16,9 @@
     saveBtn.addEventListener('click', ()=>{
         saveDetails();
     });
+
+    let ResetPasswordBtn = document.getElementById("ResetPasswordBtn");
+    ResetPasswordBtn.addEventListener('click', ResetPassword);
 })();
 
 function getDetails()
@@ -122,4 +125,34 @@ function fillFields(data){
     setValuesToData(data)();
     let accountResetBtn =  document.getElementById("accountResetBtn");
     accountResetBtn.onclick = setValuesToData(data);
+}
+
+
+function ResetPassword()
+{
+    let new_password = document.getElementById("new_password");
+    let confirm_new_password = document.getElementById("confirm_new_password");
+
+    let npVal = new_password.value;
+    let cnpVal = confirm_new_password.value;
+
+    if(npVal === cnpVal){
+        let json = {
+            customer_id : localStorage.getItem("CustomerId"),
+            password : npVal,
+            email : localStorage.getItem("Email")
+        };
+
+        $.ajax({
+            type: 'PUT',
+            url: rootUrl + '/reset_password',
+            data: json
+        })
+        .done((data)=>{
+            logout();
+        })
+        .fail((e)=>{
+            alert(e.statusText);
+        });
+    }
 }

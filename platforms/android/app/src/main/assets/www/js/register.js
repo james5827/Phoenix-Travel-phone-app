@@ -52,13 +52,11 @@
 })();
 
 function separateName(name){
-    console.log(name.split(/\s+/, 3));
     return name.split(/\s+/, 3);
 
 }
 
 function separateAddress(address){
-    console.log(address.split(/\s+/, 4));
     return address.split(/\s+/, 4);
 }
 

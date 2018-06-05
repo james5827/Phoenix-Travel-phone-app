@@ -67,7 +67,6 @@ function deleteBooking(booking, booking_no){
 class Booking extends Component
 {
     constructor(data){
-        console.log(data);
         super(data);
     }
 
@@ -151,8 +150,6 @@ function acceptInvite(component, Trip_Booking_No, Customer_Id){
 }
 
 function declineInvite(component, Trip_Booking_No, Customer_Id){
-    console.log(component);
-
     $.ajax({
             type: "DELETE",
             url: rootUrl + '/refuse_invite/' + Trip_Booking_No + '/' + Customer_Id

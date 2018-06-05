@@ -149,14 +149,11 @@ function addReview(){
 
     let trip_id = tripSel.options[tripSel.selectedIndex].value;
 
-    console.log(tripSel.options[tripSel.selectedIndex].value);
-
     let rating = 0;
     for(i = 0; i<5; ++i){
         if($(stars[i]).hasClass("reviewStar"))
             ++rating;
     }
-    console.log(rating);
 
     let json = {
         trip_id : trip_id,
@@ -167,16 +164,12 @@ function addReview(){
         dislikes: dislikes.value
     };
 
-    console.log(json);
-
     $.ajax({
         type: 'POST',
         url : rootUrl + '/insert_review',
         data : json
     })
     .done((data)=>{
-        console.log(data);
-
         loadTourReviews(localStorage.getItem("ReviewTourNo"));
         clearReviewForm();
     })
@@ -187,13 +180,11 @@ function addReview(){
 
 function getTripsForATour(tour_no)
 {
-    console.log("here");
     $.ajax({
         type : 'GET',
         url : rootUrl + '/tour_trips/' + tour_no
     })
     .done((data)=>{
-        console.log(data);
         let tripSel = document.getElementById('tripSel');
         let htmlString = '';
         data.forEach((tour)=>{
@@ -211,7 +202,6 @@ function getTripsForATour(tour_no)
 class ReviewTripOption extends Component
 {
     constructor(data) {
-        console.log(data);
         super(data);
     }
 

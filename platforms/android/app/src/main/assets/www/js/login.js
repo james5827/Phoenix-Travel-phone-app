@@ -21,6 +21,7 @@
                 password.value = "";
                 window.localStorage.setItem("CustomerId", data[0]);
                 window.localStorage.setItem("AuthKey", data[1]);
+                window.localStorage.setItem("Email", data[2]);
                 initAjaxSettings(data[1]);
 
                 $.mobile.changePage("#page3");

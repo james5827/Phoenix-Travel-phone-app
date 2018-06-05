@@ -19,7 +19,6 @@ function bookTrip(json){
                 data: json
             })
             .done((data)=>{
-                console.log("book trip " + data.trip_booking_no + "  " + data.result);
                 if(data.result)
                 {
                     bookAdditionalPassengers(data.trip_booking_no);
@@ -37,8 +36,6 @@ function bookAdditionalPassengers(trip_booking_no)
     let addPassengers = SearchedAdditionalCustomer.addedPassengers.slice();
     addPassengers.unshift(trip_booking_no);
 
-    console.log(addPassengers);
-
     $.ajax({
         type: 'POST',
         url: rootUrl + '/invite_passenger',
@@ -47,7 +44,6 @@ function bookAdditionalPassengers(trip_booking_no)
         }
     })
     .done((data)=>{
-        console.log(data);
         SearchedAdditionalCustomer.addedPassengers = [];
     })
     .fail((e)=>{
@@ -58,8 +54,6 @@ function bookAdditionalPassengers(trip_booking_no)
 function getTripBookForm(trip){
     $.mobile.changePage("#page5");
     getItineraries(trip.Tour_No);
-
-    console.log(trip);
 
     let tourName = document.getElementById("bookingTourName");
     let tripDate = document.getElementById("bookingTripDate");
@@ -84,7 +78,6 @@ function getItineraries(tour_no){
         url: rootUrl + /itineraries/ + tour_no
     })
     .done((data)=>{
-        console.log(data);
         let itineraryBody = document.getElementById('itineraryBody');
         itineraryBody.innerHTML = '';
 
@@ -109,7 +102,6 @@ function findAdditionalCustomer(email){
         url: rootUrl + '/additional_passenger_email/' + (email === '' ? "<" : email)
     })
     .done((data)=>{
-        console.log(data);
         let htmlString = '';
         data.forEach((customer) => {
             htmlString += new SearchedAdditionalCustomer(customer).render();
@@ -170,8 +162,6 @@ function listClick(element){
 
         element.parentElement.nextElementSibling.appendChild(element);
     }
-
-    console.log(SearchedAdditionalCustomer.addedPassengers);
 
     $("#filterAddPassengers").listview("refresh");
 }

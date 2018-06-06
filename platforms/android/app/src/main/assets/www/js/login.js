@@ -19,6 +19,9 @@
                 alert("Login Successful");
                 email.value = "";
                 password.value = "";
+
+                console.log(data);
+
                 window.localStorage.setItem("CustomerId", data[0]);
                 window.localStorage.setItem("AuthKey", data[1]);
                 window.localStorage.setItem("Email", data[2]);

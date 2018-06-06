@@ -74,23 +74,23 @@ class Booking extends Component
         let outerContainer = document.createElement("div");
         outerContainer.innerHTML = `
             <div class="ui-body ui-body-a booking ui-corner-all" onclick="bookingClick(this)">
-                <h2 class="inviteTitle" style="margin-top: 0"><span>${this.properties.Tour_Name}</span></h2>
-                <h4 class="inviteTitle" style="margin-bottom: 0">Departure date: <span>${this.properties.Departure_Date}</span></h4>
+                <h2 class="inviteTitle" style="margin-top: 0"><span>${this.properties.tour_name}</span></h2>
+                <h4 class="inviteTitle" style="margin-bottom: 0">Departure date: <span>${this.properties.departure_date}</span></h4>
                 <p class="toggleParagraph">Tap to toggle information</p>
 
                 <div class="hiddenBookingInformation bookingTransformHeight">
-                    <h4 class="inviteTitle">Booking Date: <span>${this.properties.Booking_Date}</span></h4>
-                    <h4 class="inviteTitle">Deposit Amount: <span>${this.properties.Deposit_Amount}</span></h4>
+                    <h4 class="inviteTitle">Booking Date: <span>${this.properties.booking_date}</span></h4>
+                    <h4 class="inviteTitle">Deposit Amount: <span>${this.properties.deposit_amount}</span></h4>
                     <h4 class="inviteTitle">Duration: <span>35 Days</span></h4>
                     <h2 style="margin-bottom: 0;">Additional Passengers</h2>
                     <div class="additionalPassengers">
                     </div>
-                    <button class="decline" onclick="deleteBooking(this.parentElement.parentElement.parentElement, ${this.properties.Trip_Booking_No})">${this.properties.Owner != true ? 'Delete Invite' : 'Delete Booking'}</button>
+                    <button class="decline" onclick="deleteBooking(this.parentElement.parentElement.parentElement, ${this.properties.trip_booking_no})">${this.properties.owner != true ? 'Delete Invite' : 'Delete Booking'}</button>
                 </div>
             </div>`;
 
         let element = outerContainer.lastElementChild.lastElementChild.lastElementChild.previousElementSibling;
-        getAdditionalPassengers(element, this.properties.Trip_Booking_No);
+        getAdditionalPassengers(element, this.properties.trip_booking_no);
 
         return outerContainer;
     }
@@ -171,8 +171,8 @@ class InvitedAdditionalPassenger extends Component
     render(){
         let classList = "ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-icon-right";
         return `
-            <button class="${classList} ${this.properties.Accepted_Invite === "1" ? 'ui-icon-check' : 'ui-icon-mail'}">
-                ${this.properties.First_Name} ${this.properties.Middle_Initial} ${this.properties.Last_Name}
+            <button class="${classList} ${this.properties.accepted_invite === "1" ? 'ui-icon-check' : 'ui-icon-mail'}">
+                ${this.properties.first_name} ${this.properties.middle_initial} ${this.properties.last_name}
             </button>
         `;
     }
@@ -187,17 +187,17 @@ class Invite extends Component
     render(){
         return `
             <div class="ui-body ui-body-a invites">
-                    <h4 class="inviteTitle">Booking Number: <span>${this.properties.Trip_Booking_No}</span></h4>
-                    <h4 class="inviteTitle">Tour: <span>${this.properties.Tour_Name}</span></h4>
-                    <h4 class="inviteTitle">Departure date: <span>${this.properties.Departure_Date}</span></h4>
-                    <h4 class="inviteTitle" style="margin-bottom: 0;">Inviter: <span>${this.properties.First_Name} ${this.properties.Middle_Initial} ${this.properties.Last_Name}</span></h4>
+                    <h4 class="inviteTitle">Booking Number: <span>${this.properties.trip_booking_no}</span></h4>
+                    <h4 class="inviteTitle">Tour: <span>${this.properties.tour_name}</span></h4>
+                    <h4 class="inviteTitle">Departure date: <span>${this.properties.departure_date}</span></h4>
+                    <h4 class="inviteTitle" style="margin-bottom: 0;">Inviter: <span>${this.properties.first_name} ${this.properties.middle_initial} ${this.properties.last_name}</span></h4>
 
                     <div class="ui-grid-a">
                         <div class="ui-block-a" style="padding-right: 2px">
-                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-check accept" onclick="acceptInvite(this.parentElement.parentElement.parentElement, ${this.properties.Trip_Booking_No}, window.localStorage.getItem('CustomerId'))">Accept</button>
+                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-check accept" onclick="acceptInvite(this.parentElement.parentElement.parentElement, ${this.properties.trip_booking_no}, window.localStorage.getItem('CustomerId'))">Accept</button>
                         </div>
                         <div class="ui-block-b" style="padding-left: 2px">
-                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-delete decline" onclick="declineInvite(this.parentElement.parentElement.parentElement, ${this.properties.Trip_Booking_No}, ${window.localStorage.getItem('CustomerId')})">Decline</button>
+                            <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-delete decline" onclick="declineInvite(this.parentElement.parentElement.parentElement, ${this.properties.trip_booking_no}, ${window.localStorage.getItem('CustomerId')})">Decline</button>
                         </div>
                     </div>
                 </div>`;

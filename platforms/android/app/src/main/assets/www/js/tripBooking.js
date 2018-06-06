@@ -58,14 +58,14 @@ function getTripBookForm(trip){
     let tourName = document.getElementById("bookingTourName");
     let tripDate = document.getElementById("bookingTripDate");
     let depositAmount = document.getElementById("bookingDepositAmount");
-    tourName.value = trip.Tour_Name;
-    tripDate.value = trip.Departure_Date;
-    depositAmount.value = trip.Standard_Amount;
+    tourName.value = trip.tour_name;
+    tripDate.value = trip.departure_date;
+    depositAmount.value = trip.standard_amount;
 
     let json = {
-        trip_id : trip.Trip_Id,
+        trip_id : trip.trip_id,
         primary_customer : window.localStorage.getItem("CustomerId"),
-        deposit_amount : trip.Standard_Amount
+        deposit_amount : trip.standard_amount
     };
 
     let bookTripBtn = document.getElementById("bookTripBtn");
@@ -122,9 +122,9 @@ class Itinerary extends Component
     render(){
         return `
             <tr>
-                <td>${this.properties.Day_No}</td>
-                <td>${this.properties.Activities}</td>
-                <td>${this.properties.Meals}</td>
+                <td>${this.properties.day_no}</td>
+                <td>${this.properties.activities}</td>
+                <td>${this.properties.meals}</td>
             </tr>`;
     }
 }
@@ -137,7 +137,7 @@ class SearchedAdditionalCustomer extends Component {
 
     render(){
         return `
-            <li class="tripAddCustomer" onclick="listClick(this)"><a href="#" class="ui-icon-mail">${this.properties.Email}</a></li>
+            <li class="tripAddCustomer" onclick="listClick(this)"><a href="#" class="ui-icon-mail">${this.properties.email}</a></li>
         `;
     }
 }

@@ -107,33 +107,33 @@ class Review extends Component{
         let starClass = 'ui-shadow ui-btn ui-corner-all ui-icon-star ui-btn-icon-notext ui-btn-inline';
         return `
             <div class="ui-body ui-body-a review" onclick="reviewClick(this)()">
-                <p class="quotation">${this.properties.General_Feedback}</p>
-                <p class="author">Trip Id: ${this.properties.Trip_Id} - Date: ${this.properties.Departure_Date}</p>
+                <p class="quotation">${this.properties.general_feedback}</p>
+                <p class="author">Trip Id: ${this.properties.trip_id} - Date: ${this.properties.departure_date}</p>
                 <p class="author">TODO</p>
                 <p class="tapReview">Tap to toggle information</p>
                 <div class="reviewHidden">
                     <div class="ui-grid-d center">
-                        <div class="ui-block-a"><a class="${starClass} ${this.properties.Rating >= "1" ? 'reviewStar' : ''}"></a></div>
-                        <div class="ui-block-b"><a class="${starClass} ${this.properties.Rating >= "2" ? 'reviewStar' : ''}"></a></div>
-                        <div class="ui-block-c"><a class="${starClass} ${this.properties.Rating >= "3" ? 'reviewStar' : ''}"></a></div>
-                        <div class="ui-block-d"><a class="${starClass} ${this.properties.Rating >= "4" ? 'reviewStar' : ''}"></a></div>
-                        <div class="ui-block-e"><a class="${starClass} ${this.properties.Rating >= "5" ? 'reviewStar' : ''}"></a></div>
+                        <div class="ui-block-a"><a class="${starClass} ${this.properties.rating >= "1" ? 'reviewStar' : ''}"></a></div>
+                        <div class="ui-block-b"><a class="${starClass} ${this.properties.rating >= "2" ? 'reviewStar' : ''}"></a></div>
+                        <div class="ui-block-c"><a class="${starClass} ${this.properties.rating >= "3" ? 'reviewStar' : ''}"></a></div>
+                        <div class="ui-block-d"><a class="${starClass} ${this.properties.rating >= "4" ? 'reviewStar' : ''}"></a></div>
+                        <div class="ui-block-e"><a class="${starClass} ${this.properties.rating >= "5" ? 'reviewStar' : ''}"></a></div>
                     </div>
                     <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <h3 style="margin: 0;">Likes</h3>
                         <div class="likes">
-                            <p>${this.properties.Likes}</p>
+                            <p>${this.properties.likes}</p>
                         </div>
                     </div>
                     <div class="ui-block-b">
                         <h3 style="margin: 0;">Dislikes</h3>
                         <div class="dislikes">
-                            <p>${this.properties.Dislikes}</p>
+                            <p>${this.properties.dislikes}</p>
                         </div>
                     </div>
                    
-                    ${this.properties.userReview ? `<button class="deleteButton" onclick="deleteUserReview(event, ${this.properties.Trip_Id}, ${this.properties.Customer_Id}, this)">Delete</button>` : ``}   
+                    ${this.properties.userReview ? `<button class="deleteButton" onclick="deleteUserReview(event, ${this.properties.trip_id}, ${this.properties.customer_id}, this)">Delete</button>` : ``}   
                 </div>
                 </div>
             </div>`;
@@ -207,7 +207,7 @@ class ReviewTripOption extends Component
 
     render(){
         return `
-            <option id="${this.properties.Trip_Id}" value="${this.properties.Trip_Id}">ID: ${this.properties.Trip_Id} - Date: ${this.properties.Departure_Date}</option>
+            <option id="${this.properties.trip_id}" value="${this.properties.trip_id}">ID: ${this.properties.trip_id} - Date: ${this.properties.departure_date}</option>
         `;
     }
 }

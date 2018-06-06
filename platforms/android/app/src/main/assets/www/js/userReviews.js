@@ -25,11 +25,11 @@ function loadUserReviews(){
         let tourReviewDiv;
 
         data.forEach((review)=>{
-            if(currentHeader !== review.Tour_Name) {
-                currentHeader = review.Tour_Name;
+            if(currentHeader !== review.tour_name) {
+                currentHeader = review.tour_name;
                 tourReviewDiv = document.createElement('div');
                 let headerTitle = document.createElement('h2');
-                headerTitle.innerText = review.Tour_Name;
+                headerTitle.innerText = review.tour_name;
                 tourReviewDiv.appendChild(headerTitle);
             }
             tourReviewDiv.innerHTML += new Review(review, true).render();

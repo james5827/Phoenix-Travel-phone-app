@@ -10,7 +10,7 @@
 
     let registerBtn = document.getElementById("registerBtn");
     let registerClearBtn = document.getElementById("registerClearBtn");
-    registerClearBtn.addEventListener('click', registerClear)
+    registerClearBtn.addEventListener('click', registerClear);
 
     registerBtn.addEventListener("click", function(){
         let splitName = separateName(name.value);

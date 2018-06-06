@@ -79,8 +79,8 @@ class Tour extends Component
             let outerContainer = document.createElement("div");
             outerContainer.innerHTML = `
             <div class="ui-body ui-body-a tour ui-corner-all" tabindex="1">
-                <h1>${this.properties.Tour_Name}</h1>
-                <p class="tourDescription">${this.properties.Description}</p>
+                <h1>${this.properties.tour_name}</h1>
+                <p class="tourDescription">${this.properties.description}</p>
                 <div class="map transform"></div>
                 <p class="MapClick"><i>Click to see map.</i></p>
                 <div>
@@ -88,7 +88,7 @@ class Tour extends Component
                     <div class="upComingTrips">
                         <ul data-role="listview" data-inset="true" class="tourTripList">
                         </ul>
-                        <button class="tourReviewBtn ui-btn-active" onclick="loadReviewPage(${this.properties.Tour_no}, '${this.properties.Tour_Name}')()">Reviews</button>
+                        <button class="tourReviewBtn ui-btn-active" onclick="loadReviewPage(${this.properties.tour_no}, '${this.properties.tour_name}')()">Reviews</button>
                     </div>
                 </div>
             </div>`;
@@ -100,7 +100,7 @@ class Tour extends Component
         let tripBtn = tripDiv.firstElementChild;
         let tripList = tripDiv.lastElementChild.firstElementChild;
 
-        initMap(mapDiv, this.properties.Route_Map);
+        initMap(mapDiv, this.properties.route_map);
 
         tourDiv.addEventListener("click", mapEvent(mapDiv));
         tourDiv.addEventListener("mouseleave", mapBlurEvent(mapDiv));
@@ -116,7 +116,7 @@ class Tour extends Component
 
         $(tourDiv).enhanceWithin();
 
-        getTrips(tripList, this.properties.Tour_no);
+        getTrips(tripList, this.properties.tour_no);
         return outerContainer;
     }
 }
@@ -128,7 +128,7 @@ class Trip extends Component
     }
 
     render(){
-        return `<li onclick='getTripBookForm(${JSON.stringify(this.properties)})'><a>${this.properties.Departure_Date}<span>${this.properties.Max_Passengers} - Positions Left</span></a></li>`;
+        return `<li onclick='getTripBookForm(${JSON.stringify(this.properties)})'><a>${this.properties.departure_date}<span>${this.properties.max_passengers} - Positions Left</span></a></li>`;
     }
 }
 

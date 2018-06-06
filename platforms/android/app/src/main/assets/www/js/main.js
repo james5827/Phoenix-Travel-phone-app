@@ -8,7 +8,7 @@
 */
 /////////////////////////////////////////Variable Declaration
 var pageinited = false;
-var rootUrl = "http://localhost/index.php";
+var rootUrl = "https://phoenix-travel-slim-api.herokuapp.com";
 /////////////////////////////////////////jquery On Document Ready
 $(function(){
         // Billk added code

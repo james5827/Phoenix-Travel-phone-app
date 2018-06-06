@@ -40,6 +40,8 @@ function getBookings() {
         let allBookingsDiv = document.getElementById("bookingsContent");
         allBookingsDiv.innerHTML = "";
 
+        console.log(data)
+
         data.forEach((booking)=>{
             allBookingsDiv.appendChild(new Booking(booking).render());
         });
@@ -124,6 +126,8 @@ function getInvites() {
     .done((data)=>{
         let allInvitesDiv = document.getElementById("invitesContent");
         let htmlString = '';
+
+        console.log(data);
 
         data.forEach((invite) => {
             htmlString += new Invite(invite).render();

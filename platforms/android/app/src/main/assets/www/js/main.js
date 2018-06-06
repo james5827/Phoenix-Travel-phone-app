@@ -69,9 +69,12 @@ function initAjaxSettings(key){
 class Component
 {
     constructor(data){
+        console.log(data);
         for(let prop in data)
         {
-            data[prop] = data[prop] != null ? escapeHtml(data[prop]) :  '';
+            if(typeof data[prop] === "string"){
+                data[prop] = escapeHtml(data[prop]);
+            }
         }
 
         this.properties = data;

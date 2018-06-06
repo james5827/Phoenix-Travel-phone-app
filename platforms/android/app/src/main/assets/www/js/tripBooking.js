@@ -56,7 +56,7 @@ function getTripBookForm(trip){
 
     console.log(trip);
 
-    getItineraries(trip.tour_No);
+    getItineraries(trip.tour_no);
 
     let tourName = document.getElementById("bookingTourName");
     let tripDate = document.getElementById("bookingTripDate");

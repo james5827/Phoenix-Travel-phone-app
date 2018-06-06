@@ -53,7 +53,10 @@ function bookAdditionalPassengers(trip_booking_no)
 
 function getTripBookForm(trip){
     $.mobile.changePage("#page5");
-    getItineraries(trip.Tour_No);
+
+    console.log(trip);
+
+    getItineraries(trip.tour_No);
 
     let tourName = document.getElementById("bookingTourName");
     let tripDate = document.getElementById("bookingTripDate");
@@ -73,9 +76,12 @@ function getTripBookForm(trip){
 }
 
 function getItineraries(tour_no){
+
+    console.log(tour_no);
+
     $.ajax({
         type: 'GET',
-        url: rootUrl + /itineraries/ + tour_no
+        url: rootUrl + '/itineraries/' + tour_no
     })
     .done((data)=>{
         let itineraryBody = document.getElementById('itineraryBody');

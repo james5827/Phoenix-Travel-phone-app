@@ -40,7 +40,7 @@ function getBookings() {
         let allBookingsDiv = document.getElementById("bookingsContent");
         allBookingsDiv.innerHTML = "";
 
-        console.log(data)
+        console.log(data);
 
         data.forEach((booking)=>{
             allBookingsDiv.appendChild(new Booking(booking).render());
@@ -105,6 +105,8 @@ function getAdditionalPassengers(el, trip_booking_no) {
     })
         .done((data)=>{
             let htmlString = '';
+
+            console.log(data);
 
             if(data[0]) {
                 data.forEach((passenger)=>{

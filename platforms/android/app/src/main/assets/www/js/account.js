@@ -88,37 +88,37 @@ function fillFields(data){
     let suburbSpan = document.getElementById("spanSuburb");
     let postCodeSpan = document.getElementById("spanPostcode");
 
-    customerIdInput.value = data.Customer_Id;
-    firstInput.value = data.First_Name;
-    initialInput.value = data.Middle_Initial;
-    lastInput.value = data.Last_Name;
-    emailInput.value = data.Email;
-    phoneInput.value = data.Phone;
-    streetNoInput.value = data.Street_No;
-    streetNameInput.value = data.Street_Name;
-    suburbInput.value = data.Suburb;
-    postCodeInput.value = data.Postcode;
+    customerIdInput.value = data.customer_id;
+    firstInput.value = data.first_name;
+    initialInput.value = data.middle_initial;
+    lastInput.value = data.last_name;
+    emailInput.value = data.email;
+    phoneInput.value = data.phone;
+    streetNoInput.value = data.street_no;
+    streetNameInput.value = data.street_name;
+    suburbInput.value = data.suburb;
+    postCodeInput.value = data.postcode;
 
     let setValuesToData = (data) => {
         return function(){
-            customerIdInput.value = data.Customer_Id;
-            firstInput.value = data.First_Name;
-            initialInput.value = data.Middle_Initial;
-            lastInput.value = data.Last_Name;
-            emailInput.value = data.Email;
-            phoneInput.value = data.Phone;
-            streetNoInput.value = data.Street_No;
-            streetNameInput.value = data.Street_Name;
-            suburbInput.value = data.Suburb;
-            postCodeInput.value = data.Postcode;
+            customerIdInput.value = data.customer_id;
+            firstInput.value = data.first_name;
+            initialInput.value = data.middle_initial;
+            lastInput.value = data.last_name;
+            emailInput.value = data.email;
+            phoneInput.value = data.phone;
+            streetNoInput.value = data.street_no;
+            streetNameInput.value = data.street_name;
+            suburbInput.value = data.suburb;
+            postCodeInput.value = data.postcode;
 
-            firstSpan.innerText = data.First_Name;
-            initialSpan.innerText = data.Middle_Initial;
-            lastSpan.innerText = data.Last_Name;
-            streetNoSpan.innerText = data.Street_No;
-            streetNameSpan.innerText = data.Street_Name;
-            suburbSpan.innerText = data.Suburb;
-            postCodeSpan.innerText = data.Postcode;
+            firstSpan.innerText = data.first_name;
+            initialSpan.innerText = data.middle_initial;
+            lastSpan.innerText = data.last_name;
+            streetNoSpan.innerText = data.street_no;
+            streetNameSpan.innerText = data.street_name;
+            suburbSpan.innerText = data.suburb;
+            postCodeSpan.innerText = data.postcode;
         }
     };
 
